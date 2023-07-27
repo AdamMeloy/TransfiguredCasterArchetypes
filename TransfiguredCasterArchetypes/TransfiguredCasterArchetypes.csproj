@@ -1,0 +1,138 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+			<LangVersion>latest</LangVersion>
+			<TargetFramework>net472</TargetFramework>
+		
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<AssemblyName>TransfiguredCasterArchetypes</AssemblyName>
+		<RootNamespace>TransfiguredCasterArchetypes</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="lib\**" />
+		<EmbeddedResource Remove="lib\**" />
+		<None Remove="lib\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Strings\Archetypes.json" />
+		<None Remove="Strings\Classes.json" />
+		<None Remove="Strings\ClassFeatures.json" />
+		<None Remove="Strings\Feats.json" />
+		<None Remove="Strings\Homebrew.json" />
+		<None Remove="Strings\Settings.json" />
+		<None Remove="Strings\Weapons.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Strings\Archetypes.json" />
+		<EmbeddedResource Include="Strings\Classes.json" />
+		<EmbeddedResource Include="Strings\ClassFeatures.json" />
+		<EmbeddedResource Include="Strings\Feats.json" />
+		<EmbeddedResource Include="Strings\Homebrew.json" />
+		<EmbeddedResource Include="Strings\Settings.json" />
+		<EmbeddedResource Include="Strings\Weapons.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AssemblyPublicizer" Version="*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="ILRepack.MSBuild.Task" Version="*" />
+		<PackageReference Include="WW-Blueprint-Core" Version="*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Main Wrath Assembly, Publicized -->
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(SolutionDir)lib\Assembly-CSharp.dll</HintPath>
+		</Reference>
+
+		<!-- Wrath Assemblies -->
+		<Reference Include="Assembly-CSharp-firstpass.dll">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+		</Reference>
+		<Reference Include="ModMenu">
+		  <HintPath>D:\Steam\steamapps\common\Pathfinder Second Adventure\Mods\ModMenu\ModMenu.dll</HintPath>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\Newtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="Owlcat.Runtime.Core">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Owlcat.Runtime.UI">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="Owlcat.Runtime.Validation">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Validation.dll</HintPath>
+		</Reference>
+		<Reference Include="Owlcat.Runtime.Visual">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\Owlcat.Runtime.Visual.dll</HintPath>
+		</Reference>
+		<Reference Include="Owlcat.SharedTypes">
+		  <HintPath>D:\Steam\steamapps\common\Pathfinder Second Adventure\Wrath_Data\Managed\Owlcat.SharedTypes.dll</HintPath>
+		</Reference>
+		<Reference Include="UniRx">
+		  <HintPath>D:\Steam\steamapps\common\Pathfinder Second Adventure\Wrath_Data\Managed\UniRx.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\UnityEngine.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+
+		<!-- Tabletop Tweaks Core -->
+		<Reference Include="TabletopTweaks-Core">
+			<HintPath>$(WrathPath)\Mods\TabletopTweaks-Core\TabletopTweaks-Core.dll</HintPath>
+		</Reference>
+
+		<!-- UMM & Harmony -->
+		<Reference Include="0Harmony">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\UnityModManager\0Harmony.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityModManager">
+			<HintPath>$(WrathPath)\Wrath_Data\Managed\UnityModManager\UnityModManager.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Info.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="LocalizedStrings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<!-- Generates Assembly-CSharp_public.dll -->
+	<Target Name="Publicize" AfterTargets="Clean">
+		<ItemGroup>
+			<Assemblies Include="$(WrathPath)\Wrath_Data\Managed\Assembly-CSharp.dll" />
+			<PublicAssembly Include="$(SolutionDir)\lib\Assembly-CSharp_public.dll" />
+			<RenamedAssembly Include="$(SolutionDir)\lib\Assembly-CSharp.dll" />
+		</ItemGroup>
+
+		<RemoveDir Directories="$(SolutionDir)lib/" />
+		<PublicizeTask InputAssemblies="@(Assemblies)" OutputDir="$(SolutionDir)lib/" />
+		<Move SourceFiles="@(PublicAssembly)" DestinationFiles="@(RenamedAssembly)" />
+	</Target>
+
+	<!-- Merges BlueprintCore.dll into the main DLL -->
+	<Target Name="ILRepack" AfterTargets="Build">
+		<ItemGroup>
+			<InputAssemblies Include="BlueprintCore.dll" />
+			<InputAssemblies Include="TransfiguredCasterArchetypes.dll" />
+			<OutputAssembly Include="TransfiguredCasterArchetypes.dll" />
+		</ItemGroup>
+
+		<Message Text="Merging: @(InputAssemblies) into @(OutputAssembly)" Importance="High" />
+
+		<ILRepack OutputType="Dll" MainAssembly="TransfiguredCasterArchetypes.dll" OutputAssembly="@(OutputAssembly)" InputAssemblies="@(InputAssemblies)" WorkingDirectory="$(OutputPath)" />
+	</Target>
+	<ProjectExtensions><VisualStudio><UserProperties strings_4weapons_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
+
+</Project>

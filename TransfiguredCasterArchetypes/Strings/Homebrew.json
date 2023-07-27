@@ -1,0 +1,21 @@
+[
+  {
+    "Key": "MindfulEnchantment.Name",
+    "enGB": "Mindful",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "MindfulEnchantment.Description",
+    "enGB": "Mindful weapons are unusually heavy with knowledge. A wielder can choose to apply her {g|Encyclopedia:Intelligence}Intelligence{/g} modifier to {g|Encyclopedia:Damage}damage rolls{/g} with a mindful weapon in place of her {g|Encyclopedia:Strength}Strength{/g} modifier (whichever is higher). This modifier to damage is reduced for off-hand weapons.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "MindfulHolyBookWeapon.Name",
+    "ProcessTemplates": false,
+    "enGB": "Mindful Holy Book",
+    "zhCN": "",
+    "ruRU": ""
+  }
+]

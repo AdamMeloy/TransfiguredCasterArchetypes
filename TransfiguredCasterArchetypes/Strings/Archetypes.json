@@ -1,0 +1,80 @@
+[
+  // **** Living Grimoire **** //
+  {
+    "Key": "LivingGrimoire.Name",
+    "ProcessTemplates": false,
+    "enGB": "Living Grimoire",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.Description",
+    "enGB": "The living grimoire literally wields the sacred word of his deity, using his holy tome to smite the foes of his god with divine might.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.Orisons.Name",
+    "ProcessTemplates": false,
+    "enGB": "Orisons",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.Orisons.Description",
+    "enGB": "Inquisitors can cast a number of {g|Encyclopedia:Cantrips_Orisons}orisons{/g}, or 0-level {g|Encyclopedia:Spell}spells{/g}. These spells are cast like any other spell, but they are not expended when cast and may be used again.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.HolyBook.Name",
+    "ProcessTemplates": false,
+    "enGB": "Holy Book",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.HolyBook.Description",
+    "enGB": "At 1st level, a living grimoire forms a supernatural bond with a large ironbound tome containing the holy text of his deity and learns to use it as a weapon.\nThe tome serves as his holy symbol and divine focus, and can be enchanted as a magic weapon.",
+    "zhCN": null,
+    "ruRU": null
+  },
+
+  {
+    "Key": "LivingGrimoire.WordOfGod.Name",
+    "ProcessTemplates": false,
+    "enGB": "Word Of God",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.WordOfGod.Description",
+    "enGB": "At 20th level, a living grimoire can smite his foes with the holy word of his deity. Up to seven times per day, the inquisitor can invoke the word of god on a foe. Once declared, the the inquisitor can make a single {g|Encyclopedia:Attack}attack{/g} with his holy book against a target. If the attack hits, it deals {g|Encyclopedia:Damage}damage{/g} normally and the target must make a {g|Encyclopedia:Saving_Throw}Fortitude save{/g} or die. The {g|Encyclopedia:DC}DC{/g} of this save is equal to 10 + 1/2 the living grimoire’s inquisitor level + his {g|Encyclopedia:Intelligence}Intelligence{/g} modifier. Regardless of whether or not the save is made, the target creature is immune to the living grimoire's word of god ability for 24 hours.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.HellknightSignifer.Description",
+    "enGB": "At 1st level, and at every level thereafter, a Hellknight signifer gains new {g|Encyclopedia:Spell}spells{/g} per day as if he had also gained a level in a spellcasting class he belonged to before adding the prestige class. He does not, however, gain any other benefit a character of that class would have gained, except for additional spells per day, spells known, and an increased effective level of spellcasting. If a character had more than one spellcasting class before becoming a Hellknight signifer, he must decide to which class he adds the new level for purposes of determining spells per day.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.MysticTheurge.Description",
+    "enGB": "At 1st level, the mystic theurge selects a divine {g|Encyclopedia:Spell}spellcasting{/g} class she belonged to before adding the prestige class. When a new mystic theurge level is gained, the character gains new spells per day and new spells known as if she had also gained a level in that spellcasting class.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.Loremaster.Description",
+    "enGB": "When a new loremaster level is gained, the character gains new {g|Encyclopedia:Spell}spells{/g} per day as if he had also gained a level in a spellcasting class he belonged to before adding the prestige class. He does not, however, gain other benefits a character of that class would have gained, except for additional spells per day, spells known (if he is a spontaneous spellcaster), and an increased effective level of spellcasting. If a character had more than one spellcasting class before becoming a loremaster, he must decide to which class he adds the new level for purposes of determining the number of spells per day.",
+    "zhCN": null,
+    "ruRU": null
+  }
+
+
+
+
+
+  // **************************** //
+]

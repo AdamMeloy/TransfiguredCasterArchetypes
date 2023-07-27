@@ -1,0 +1,61 @@
+[
+  // **** Investigator **** //
+  {
+    "Key": "Investigator.Name",
+    "ProcessTemplates": false,
+    "enGB": "Investigator",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "Investigator.Description",
+    "enGB": "",
+    "zhCN": null,
+    "ruRU": null
+  },
+
+  {
+    "Key": "Investigator.Proficiencies",
+    "ProcessTemplates": false,
+    "enGB": "Investigator Proficiencies",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "Investigator.Proficiencies.Description",
+    "enGB": "",
+    "zhCN": null,
+    "ruRU": null
+  },
+  // **************************** //
+
+  // **** Vigilante **** //
+  {
+    "Key": "Vigilante.Name",
+    "ProcessTemplates": false,
+    "enGB": "Vigilante",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "Vigilante.Description",
+    "enGB": "",
+    "zhCN": null,
+    "ruRU": null
+  },
+
+  {
+    "Key": "Vigilante.Proficiencies",
+    "ProcessTemplates": false,
+    "enGB": "Vigilante Proficiencies",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "Vigilante.Proficiencies.Description",
+    "enGB": "",
+    "zhCN": null,
+    "ruRU": null
+  }
+  // **************************** //
+]
