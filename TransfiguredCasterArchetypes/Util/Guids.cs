@@ -22,14 +22,25 @@ namespace TransfiguredCasterArchetypes.Util
         internal const string LivingGrimoireSpellbook = "03f7cfc2-2601-4644-80e9-c5d134e116f6";
 
         internal const string LivingGrimoireHolyBook = "5c904fe3-a669-4469-b337-21918a08fdcb";
+        internal const string WeaponFocusHolyBook = "c6a718bf-d499-4fd2-8223-662e9177fea1";
+
         internal const string LivingGrimoireSacredWord = "6aab1970-2b2f-45b1-be6e-bbdd7395baa3";
         internal const string SacredWordBaseDamageFeature = "35d822cd-a58c-4474-9a1d-d862bcf94e6e";
+        internal const string SacredWordWeaponSwitch = "7500aa92-a520-49f2-b674-1fb87e3d2504";
+
+        internal const string SacredWordBuffBase = "79dfc2a9-6832-4c0d-be61-2dd6e575c800";
+        internal const string SacredWordBuff1d6 = "71c0586a-8bde-4eb3-87d8-505244c042f4";
+        internal const string SacredWordBuff1d8 = "0220b0c9-5c1c-4b44-bbb9-bb2aa40eb6a5";
+        internal const string SacredWordBuff1d10 = "b3ce498d-2128-4262-9635-8958b47d5156";
+        internal const string SacredWordBuff2d6 = "15bfce87-d2ea-46bd-b89e-a97096e858d8";
+        internal const string SacredWordBuff2d8 = "7d5ed577-1d7c-48a3-bd58-206a02b9203e";
+
         internal const string SacredWordEnchantFeature = "de049b6b-0cf7-463e-ab14-7e49d7e58799";
         internal const string SacredWordEnchantPlus2 = "6fbf5c44-4072-4879-afb0-c159fb9c7b3a";
         internal const string SacredWordEnchantPlus3 = "c74e71fc-1f9a-432e-9fc9-29d129045cde";
         internal const string SacredWordEnchantPlus4 = "a7876ca7-09b6-4789-9b0a-bf1841226e9e";
         internal const string SacredWordEnchantPlus5 = "55a81ea1-177d-4331-8a0d-aa8d9b870d93";
-        internal const string SacredWordSwitch = "7500aa92-a520-49f2-b674-1fb87e3d2504";
+
         internal const string LivingGrimoireBlessedScript = "d087f299-a495-4a9f-9b01-6f9190189423";
         internal const string BlessedScript5 = "b1b045b8-829d-4850-8ecc-e025458074d4";
         internal const string BlessedScript8 = "1ddfc107-50be-435d-a833-0b5ed4b76164";
@@ -37,6 +48,7 @@ namespace TransfiguredCasterArchetypes.Util
         internal const string BlessedScript16 = "80e813f9-ddf6-4426-aae4-1d53d6314354";
         internal const string LivingGrimoireWordOfGod = "f2e47e4f-259d-48a6-a743-fb404a4e0fee";
         internal const string LivingGrimoireWordOfGodAbility = "70668bfc-b86b-420e-a9ba-78a8ee61ac15";
+        internal const string LivingGrimoireWordOfGodResource = "f68cccbe-a8e0-4453-9aca-05ce932d6c0e";
         internal const string LivingGrimoireWordOfGodBuff = "90257617-02b7-4d6e-98ac-d31cc891d7e1";
 
         internal const string MysticTheurgeLivingGrimoireLevelUp = "fda9291b-5d43-4863-985c-1e02e8531077";

@@ -11,42 +11,17 @@ using Kingmaker.Blueprints.Classes.Spells;
 using Kingmaker.Enums;
 using Kingmaker.EntitySystem.Stats;
 using TransfiguredCasterArchetypes.Util;
-using static Kingmaker.UI.GenericSlot.EquipSlotBase;
 using CharacterOptionsPlus.Util;
 using BlueprintCore.Utils.Types;
-using Kingmaker.DLC;
-using TabletopTweaks.Core.NewComponents.Prerequisites;
-using Kingmaker.Blueprints.Classes.Prerequisites;
-using System.Security.AccessControl;
-using Kingmaker.UnitLogic;
-using Kingmaker.Designers.Mechanics.Buffs;
-using Kingmaker.UnitLogic.FactLogic;
-using Kingmaker.UnitLogic.Class.LevelUp.Actions;
-using Kingmaker.UnitLogic.Class.LevelUp;
 using TabletopTweaks.Core.NewComponents;
-using TransfiguredCasterArchetypes.Components;
-using Kingmaker.EntitySystem.Entities;
 using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs;
 using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Abilities;
-using Kingmaker.ElementsSystem;
 using Kingmaker.UnitLogic.Buffs.Blueprints;
 using Kingmaker.UnitLogic.Mechanics;
-using Kingmaker.UnitLogic.Mechanics.Components;
-using Kingmaker.Blueprints.Area;
-using Kingmaker.Designers.EventConditionActionSystem.Actions;
-using Kingmaker.UnitLogic.Mechanics.Conditions;
-using JetBrains.Annotations;
-using static Kingmaker.TurnBasedMode.ActionsState;
-using Kingmaker.UnitLogic.Mechanics.Actions;
-using Kingmaker.RuleSystem;
-using Kingmaker.Designers.Mechanics.Facts;
-using TabletopTweaks.Core.UMMTools.Utility;
 using Kingmaker.Settings;
 using BlueprintCore.Actions.Builder;
 using BlueprintCore.Actions.Builder.ContextEx;
-using Kingmaker.UnitLogic.Buffs;
 using BlueprintCore.Conditions.Builder;
-using BlueprintCore.Actions.Builder.KingdomEx;
 using BlueprintCore.Conditions.Builder.ContextEx;
 using Kingmaker.Blueprints.Items.Weapons;
 using Kingmaker.Utility;
@@ -55,6 +30,15 @@ using Kingmaker.Visual.Animation.Kingmaker.Actions;
 using Kingmaker.UnitLogic.Commands.Base;
 using Kingmaker.Blueprints.JsonSystem.Converters;
 using UnityEngine;
+using BlueprintCore.Blueprints.CustomConfigurators;
+using Kingmaker.Blueprints.Classes.Selection;
+using BlueprintCore.Blueprints.Configurators.Classes.Selection;
+using Kingmaker.UnitLogic.Abilities;
+using Kingmaker.RuleSystem;
+using ValueType = Kingmaker.UnitLogic.Mechanics.ValueType;
+using Kingmaker.UnitLogic.Abilities.Components;
+using BlueprintCore.Blueprints.Configurators.UnitLogic.ActivatableAbilities;
+using Kingmaker.UnitLogic.Mechanics.Components;
 
 namespace TransfiguredCasterArchetypes.Archetypes {
 	static class LivingGrimoire {
@@ -68,15 +52,27 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         internal const string HolyBook = "LivingGrimoire.HolyBook";
         internal const string HolyBookName = "LivingGrimoire.HolyBook.Name";
         internal const string HolyBookDescription = "LivingGrimoire.HolyBook.Description";
+        internal const string WeaponFocusHolyBook = "LivingGrimoire.HolyBook.WeaponFocus";
 
         internal const string SacredWord = "LivingGrimoire.SacredWord";
+        internal const string SacredWordName = "LivingGrimoire.SacredWord.Name";
+        internal const string SacredWordDescription = "LivingGrimoire.SacredWord.Description";
+
+        internal const string SacredWordBuffBase = "LivingGrimoire.SacredWord.Buff";
+        internal const string SacredWordBuff1d6 = "LivingGrimoire.SacredWord.Buff.1d6";
+        internal const string SacredWordBuff1d8 = "LivingGrimoire.SacredWord.Buff.1d8";
+        internal const string SacredWordBuff1d10 = "LivingGrimoire.SacredWord.Buff.1d10";
+        internal const string SacredWordBuff2d6 = "LivingGrimoire.SacredWord.Buff.2d6";
+        internal const string SacredWordBuff2d8 = "LivingGrimoire.SacredWord.Buff.2d8";
+
+        internal const string SacredWordWeaponSwitch = "LivingGrimoire.SacredWordWeaponSwitch";
         internal const string SacredWordBaseDamageFeature = "LivingGrimoire.SacredWordBaseDamageFeature";
         internal const string SacredWordEnchantFeature = "LivingGrimoire.SacredWordEnchantFeature";
         internal const string SacredWordEnchantPlus2 = "LivingGrimoire.SacredWordEnchantPlus2";
         internal const string SacredWordEnchantPlus3 = "LivingGrimoire.SacredWordEnchantPlus3";
         internal const string SacredWordEnchantPlus4 = "LivingGrimoire.SacredWordEnchantPlus4";
         internal const string SacredWordEnchantPlus5 = "LivingGrimoire.SacredWordEnchantPlus5";
-        internal const string SacredWordSwitch = "LivingGrimoire.SacredWordSwitch";
+
         internal const string BlessedScript = "LivingGrimoire.BlessedScript";
         internal const string BlessedScript5 = "LivingGrimoire.BlessedScript5";
         internal const string BlessedScript8 = "LivingGrimoire.BlessedScript8";
@@ -87,12 +83,12 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         internal const string WordOfGodName = "LivingGrimoire.WordOfGod.Name";
         internal const string WordOfGodDescription = "LivingGrimoire.WordOfGod.Description";
         internal const string WordOfGodAbility = "LivingGrimoire.WordOfGod.Ability";
+        internal const string WordOfGodResource = "LivingGrimoire.WordOfGod.Resource";
         internal const string WordOfGodBuff = "LivingGrimoire.WordOfGod.Buff";
 
         internal const string SacredWordEnchantBaneChoice = "";
         internal const string SacredWordEnchantBaneBuff = "";
-        internal const string SacredWordBuffBase = "";
-        internal const string HolyBookWeaponFocus = "";
+
 
         internal const string LivingGrimoireProficiencies = "LivingGrimoire.Proficiencies";
 
@@ -216,14 +212,14 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .AddToRemoveFeatures(level: 20, FeatureRefs.TrueJudgmentFeature.ToString());
 
             archetype
-                .AddToAddFeatures(level: 1, CreateCantrips(), CreateHolyBook())
-                .AddToAddFeatures(level: 2,/* CreateSacredWord())
+                .AddToAddFeatures(level: 1, CreateCantrips(), CreateHolyBook()/*)
+                .AddToAddFeatures(level: 2, CreateSacredWord())
                 .AddToAddFeatures(level: 4, CreateSacredWordEnchant())
                 .AddToAddFeatures(level: 5, CreateBlessedScript5())
                 .AddToAddFeatures(level: 8, CreateSacredWordPlus2(), CreateBlessedScript8())
                 .AddToAddFeatures(level: 12, CreateSacredWordPlus3(), CreateBlessedScript12())
                 .AddToAddFeatures(level: 16, CreateSacredWordPlus4(), CreateBlessedScript16())
-                .AddToAddFeatures(level: 20,*/ CreateWordOfGod()/*, CreateSacredWordPlus5()*/);
+                .AddToAddFeatures(level: 20, CreateWordOfGod(), CreateSacredWordPlus5()*/);
 
             archetype.Configure();
         }
@@ -418,44 +414,279 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         
         private static BlueprintFeature CreateHolyBook()
         {
-            Logger.Log($"Configuring {HolyBook}");
+            Logger.Log($"Configuring {HolyBook} Weapon Focus");
+            var focus = FeatureConfigurator.New(WeaponFocusHolyBook, Guids.WeaponFocusHolyBook)
+                .AddWeaponFocus
+                    (
+                        weaponType: Guids.HolyBookWeaponType,
+                        attackBonus: 1,
+                        descriptor: ModifierDescriptor.UntypedStackable
+                    )
+                .SetAllowNonContextActions(false)
+                .SetDisplayName("Weapon Focus (Holy Book)")
+                .SetDescription("You gain a +1 {g|Encyclopedia:Bonus}bonus{/g} on all {g|Encyclopedia:Attack}attack rolls{/g} you make using holy books.")
+                .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("dd77733ce72f8314eaf20d0824af29ac", 21300000))
+                .SetHideInUI(false)
+                .SetHideInCharacterSheetAndLevelUp(false)
+                .SetHideNotAvailibleInUI(false)
+                .SetRanks(1)
+                .SetReapplyOnLevelUp(false)
+                .SetIsClassFeature(true)
+                .Configure();
 
+            Logger.Log($"Configuring {HolyBook}");
             string WeaponGuid = Guids.HolyBookWeapon;
             if (Settings.IsEnabled(Guids.MindfulEnchantmentHomebrew))
                 if (Settings.IsEnabled(Guids.MindfulHolyBookWeapon))
                     WeaponGuid = Guids.MindfulHolyBookWeapon;
 
             Logger.Log($"Blueprint {WeaponGuid} will be used for HolyBook");
-
             var holyBook = FeatureConfigurator.New(HolyBook, Guids.LivingGrimoireHolyBook)
                 .SetDisplayName(HolyBookName)
                 .SetDescription(HolyBookDescription)
-                
-                .AddWeaponCategoryAttackBonus(1, WeaponCategory.LightMace, ModifierDescriptor.UntypedStackable)
-                //.AddToIsPrerequisiteFor(SacredWord)
                 .AddStartingEquipment(new() { BlueprintTool.GetRef<BlueprintItemReference>(WeaponGuid) })
                 .SetIsClassFeature(true)
+                .AddFeatureOnApply(Guids.WeaponFocusHolyBook)
                 .Configure();
 
             return holyBook;
         }
 
         #region Sacred Word
-        /*
+        
         private static BlueprintFeature CreateSacredWord()
         {
-            return FeatureConfigurator.New(SacredWordBaseDamageFeature, Guids.SacredWordBaseDamageFeature)
-                .CopyFrom(FeatureRefs.WarpriestSacredWeaponBaseDamageFeature)
-                .SetDisplayName("Sacred Word")
-                .SetDescription("At 2nd level, a living grimoire learns to charge his holy book with the power of his faith. The inquisitor " +
-                                "gains the benefits of the warpriest’s sacred weapon class ability, but the benefits apply only to his bonded " +
-                                "holy book. Like a warpriest’s sacred weapon, the living grimoire’s book deals damage based on the inquisitor’s " +
-                                "level, not the book’s base damage (unless the inquisitor chooses to use the book’s base damage).")
+            Logger.Log($"Creating Weapon Buffs For {Guids.LivingGrimoireSacredWord}");
+            var weaponbuff1d6 = FeatureConfigurator.New(SacredWordBuff1d6, Guids.SacredWordBuff1d6)
+                .CopyFrom(BuffRefs.WarpriestSacredWeaponBuff1d6.ToString())
+                .AddSacredWeaponDamageOverride
+                (
+                    feature: Guids.WeaponFocusHolyBook,
+                    formula: new DiceFormula(1, DiceType.D6)
+                )
+                .Configure();
+            var weaponbuff1d8 = FeatureConfigurator.New(SacredWordBuff1d8, Guids.SacredWordBuff1d8)
+                .CopyFrom(BuffRefs.WarpriestSacredWeaponBuff1d8.ToString())
+                .AddSacredWeaponDamageOverride
+                (
+                    feature: Guids.WeaponFocusHolyBook,
+                    formula: new DiceFormula(1, DiceType.D8)
+                )
+                .Configure();
+            var weaponbuff1d10 = FeatureConfigurator.New(SacredWordBuff1d10, Guids.SacredWordBuff1d10)
+                .CopyFrom(BuffRefs.WarpriestSacredWeaponBuff1d10.ToString())
+                .AddSacredWeaponDamageOverride
+                (
+                    feature: Guids.WeaponFocusHolyBook,
+                    formula: new DiceFormula(1, DiceType.D10)
+                )
+                .Configure();
+            var weaponbuff2d6 = FeatureConfigurator.New(SacredWordBuff2d6, Guids.SacredWordBuff2d6)
+                .CopyFrom(BuffRefs.WarpriestSacredWeaponBuff2d6.ToString())
+                .AddSacredWeaponDamageOverride
+                (
+                    feature: Guids.WeaponFocusHolyBook,
+                    formula: new DiceFormula(2, DiceType.D6)
+                )
+                .Configure();
+            var weaponbuff2d8 = FeatureConfigurator.New(SacredWordBuff2d8, Guids.SacredWordBuff2d8)
+                .CopyFrom(BuffRefs.WarpriestSacredWeaponBuff2d8.ToString())
+                .AddSacredWeaponDamageOverride
+                (
+                    feature: Guids.WeaponFocusHolyBook,
+                    formula: new DiceFormula(2, DiceType.D8)
+                )
+                .Configure();
 
+
+            Logger.Log($"Creating Buff Base Feature For {Guids.LivingGrimoireSacredWord}");
+            var buff = BuffConfigurator.New(SacredWordBuffBase, Guids.SacredWordBuffBase)
+                .CopyFrom(BuffRefs.WarpriestSacredWeaponBuffBase)
+                .AddFactContextActions
+                (
+                    activated: ActionsBuilder.New()
+                    .Conditional
+                    (
+                        conditions: ConditionsBuilder.New()
+                        .AddOrAndLogic
+                        (
+                            ConditionsBuilder.New()
+                            .SharedValueHigher
+                            (
+                                negate: true,
+                                sharedValue: AbilitySharedValue.Damage,
+                                higherOrEqual: 5,
+                                inverted: false
+                            )
+                        ),
+                        ifTrue: ActionsBuilder.New()
+                        .ApplyBuffPermanent
+                        (
+                            buff: Guids.SacredWordBuff1d6,
+                            isFromSpell: false,
+                            isNotDispelable: false,
+                            toCaster: false,
+                            asChild: true,
+                            sameDuration: false,
+                            ignoreParentContext: default,
+                            notLinkToAreaEffect: default
+                        ),
+                        ifFalse: ActionsBuilder.New()
+                        .Conditional
+                        (
+                            conditions: ConditionsBuilder.New()
+                            .AddOrAndLogic
+                            (
+                                ConditionsBuilder.New()
+                                .SharedValueHigher
+                                (
+                                    negate: true,
+                                    sharedValue: AbilitySharedValue.Damage,
+                                    higherOrEqual: 10,
+                                    inverted: false
+                                )
+                            ),
+                            ifTrue: ActionsBuilder.New()
+                            .ApplyBuffPermanent
+                            (
+                                buff: Guids.SacredWordBuff1d8,
+                                isFromSpell: false,
+                                isNotDispelable: false,
+                                toCaster: false,
+                                asChild: true,
+                                sameDuration: false,
+                                ignoreParentContext: default,
+                                notLinkToAreaEffect: default
+                            ),
+                            ifFalse: ActionsBuilder.New()
+                            .Conditional
+                            (
+                                conditions: ConditionsBuilder.New()
+                                .AddOrAndLogic
+                                (
+                                    ConditionsBuilder.New()
+                                    .SharedValueHigher
+                                    (
+                                        negate: true,
+                                        sharedValue: AbilitySharedValue.Damage,
+                                        higherOrEqual: 15,
+                                        inverted: false
+                                    )
+                                ),
+                                ifTrue: ActionsBuilder.New()
+                                .ApplyBuffPermanent
+                                (
+                                    buff: Guids.SacredWordBuff1d10,
+                                    isFromSpell: false,
+                                    isNotDispelable: false,
+                                    toCaster: false,
+                                    asChild: true,
+                                    sameDuration: false,
+                                    ignoreParentContext: default,
+                                    notLinkToAreaEffect: default
+                                ),
+                                ifFalse: ActionsBuilder.New()
+                                .Conditional
+                                (
+                                    conditions: ConditionsBuilder.New()
+                                    .AddOrAndLogic
+                                    (
+                                        ConditionsBuilder.New()
+                                        .SharedValueHigher
+                                        (
+                                            negate: true,
+                                            sharedValue: AbilitySharedValue.Damage,
+                                            higherOrEqual: 20,
+                                            inverted: false
+                                        )
+                                    ),
+                                    ifTrue: ActionsBuilder.New()
+                                    .ApplyBuffPermanent
+                                    (
+                                        buff: Guids.SacredWordBuff2d6,
+                                        isFromSpell: false,
+                                        isNotDispelable: false,
+                                        toCaster: false,
+                                        asChild: true,
+                                        sameDuration: false,
+                                        ignoreParentContext: default,
+                                        notLinkToAreaEffect: default
+                                    ),
+                                    ifFalse: ActionsBuilder.New()
+                                    .ApplyBuffPermanent
+                                    (
+                                        buff: Guids.SacredWordBuff2d8,
+                                        isFromSpell: false,
+                                        isNotDispelable: false,
+                                        toCaster: false,
+                                        asChild: true,
+                                        sameDuration: false,
+                                        ignoreParentContext: default,
+                                        notLinkToAreaEffect: default
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+                .AddContextRankConfig
+                (
+                    ContextRankConfigs.ClassLevel(new[] { CharacterClassRefs.InquisitorClass.ToString() }, false, default, 20, 0)
+                )
+                .AddContextCalculateSharedValue
+                (
+                    modifier: 1.0,
+                    value: new ContextDiceValue()
+                )
+                .AddSacredWeaponFavoriteDamageOverride
+                (
+                   buff1d6: weaponbuff1d6,
+                   buff1d8: weaponbuff1d8,
+                   buff1d10: weaponbuff1d10,
+                   buff2d6: weaponbuff2d6,
+                   buff2d8: weaponbuff2d8
+                )
+                .Configure();
+
+            Logger.Log($"Creating Weapon Switch Feature For {Guids.LivingGrimoireSacredWord}");
+            var abilitySwitch = ActivatableAbilityConfigurator.New(SacredWordWeaponSwitch, Guids.SacredWordWeaponSwitch)
+                .CopyFrom(ActivatableAbilityRefs.WarpriestSacredWeaponSwitch)
+                .SetDisplayName(SacredWordName)
+                .SetDescription(SacredWordDescription)
+                .SetBuff(Guids.SacredWordBuffBase)
+                .Configure();
+
+            Logger.Log($"Creating Base Damage Feature For {Guids.LivingGrimoireSacredWord}");
+            var baseDamage = FeatureConfigurator.New(SacredWordBaseDamageFeature, Guids.SacredWordBaseDamageFeature)
+                .CopyFrom(FeatureRefs.WarpriestSacredWeaponBaseDamageFeature)
+                .AddFacts
+                (
+                    facts: new()
+                    {
+                        BlueprintTool.GetRef<BlueprintUnitFactReference>
+                        (
+                            BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.SacredWordWeaponSwitch).ToString()
+                        )
+                    }
+                )
+                .SetDisplayName(SacredWordName)
+                .SetDescription(SacredWordDescription)
+                .Configure();
+
+            return FeatureConfigurator.New(SacredWord, Guids.LivingGrimoireSacredWord)
+                .SetDisplayName(SacredWordName)
+                .SetDescription(SacredWordDescription)
+                .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("ea962cdf84daeb8469e0464390ee165c", 21300000)) //use sacred weapon icon
+                .SetHideInUI(false)
+                .SetHideInCharacterSheetAndLevelUp(false)
+                .SetHideNotAvailibleInUI(false)
+                .SetRanks(1)
+                .SetReapplyOnLevelUp(false)
+                .SetIsClassFeature(true)
                 .Configure();
         }
 
-        
+        /*
         private static BlueprintFeature CreateSacredWordEnchant()
         {
             return FeatureConfigurator.New(SacredWordEnchantFeature, Guids.SacredWordEnchantFeature)
@@ -517,8 +748,21 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         #region Word Of God
         private static BlueprintFeature CreateWordOfGod()
         {
+            Logger.Log("Creating Ability Resource for Word of God");
+            var abilityResource = AbilityResourceConfigurator.New(WordOfGodResource, Guids.LivingGrimoireWordOfGodResource)
+                .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("32647606f1accbb4d9e64f65ae2b771c", 21300000))
+                .SetMaxAmount
+                (
+                    ResourceAmountBuilder.New(7).Build()
+                )
+                .SetUseMax(false)
+                .SetMax(7)
+                .SetMin(0)
+                .Configure();
 
+            Logger.Log("Creating Caster Buff for Word of God");
             var buff = BuffConfigurator.New(WordOfGodBuff, Guids.LivingGrimoireWordOfGodBuff)
+                //.CopyFrom(BuffRefs.TrueJudgmentCasterBuff)
                 .AddInitiatorAttackWithWeaponTrigger
                 (
                     onlyHit: true,
@@ -531,12 +775,12 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                     notCriticalHit: false,
                     onlySneakAttack: false,
                     notSneakAttack: false,
-                    weaponType: Guids.HolyBookWeaponType.ToString(),
+                    weaponType: Guids.HolyBookWeaponType,
                     checkWeaponCategory: false,
                     category: WeaponCategory.UnarmedStrike,
                     checkWeaponGroup: false,
                     group: WeaponFighterGroup.None,
-                    checkWeaponRangeType: true,
+                    checkWeaponRangeType: false,
                     rangeType: WeaponRangeType.Melee,
                     actionsOnInitiator: false,
                     reduceHPToZero: false,
@@ -550,7 +794,15 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                     .Conditional
                     (
                         conditions: ConditionsBuilder.New()
-                        .HasBuffFromCaster(negate: false, buff: BuffRefs.TrueJudgmentCooldownBuff.ToString()),
+                        .AddOrAndLogic
+                        (
+                            ConditionsBuilder.New()
+                            .HasBuffFromCaster
+                            (
+                                negate: false,
+                                buff: BuffRefs.TrueJudgmentCooldownBuff.ToString()
+                            )
+                        ),
                         ifFalse: ActionsBuilder.New()
                         .SavingThrow
                         (
@@ -604,13 +856,14 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetFrequency(DurationRate.Rounds)
                 .Configure();
 
+            Logger.Log("Creating Ability for Word of God");
             var ability = AbilityConfigurator.New(WordOfGodAbility, Guids.LivingGrimoireWordOfGodAbility)
                 .AddAbilityEffectRunAction
                 (
                     actions: ActionsBuilder.New()
                     .ApplyBuffPermanent
                     (
-                        buff: Guids.LivingGrimoireWordOfGodBuff,
+                        buff: BuffRefs.TrueJudgmentCasterBuff.ToString(),
                         isFromSpell: false,
                         isNotDispelable: true,
                         toCaster: false,
@@ -618,10 +871,15 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                         sameDuration: false,
                         ignoreParentContext: default,
                         notLinkToAreaEffect: default
-                    )
-                    .Build()
+                    ).Build()
                 )
-                .AddAbilityCasterHasFacts()
+                .AddAbilityResourceLogic
+                (
+                    requiredResource: abilityResource,
+                    isSpendResource: true,
+                    costIsCustom: false,
+                    amount: 1
+                )
                 .SetAllowNonContextActions(false)
                 .SetDisplayName(WordOfGodName)
                 .SetDescription(WordOfGodDescription)
@@ -645,11 +903,12 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetHasFastAnimation(false)
                 .SetTargetMapObjects(false)
                 .SetActionType(UnitCommand.CommandType.Swift)
-                .SetAvailableMetamagic()
                 .SetIsFullRoundAction(false)
                 .SetDisableLog(false)
                 .Configure();
 
+            Logger.Log("Creating Word of God Feature");
+            return FeatureConfigurator.New(WordOfGod, Guids.LivingGrimoireWordOfGod)
             return FeatureConfigurator.New(WordOfGod, Guids.LivingGrimoireWordOfGod)
                 .AddFacts
                 (
@@ -658,6 +917,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                         BlueprintTool.GetRef<BlueprintUnitFactReference>
                         (
                             BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.LivingGrimoireWordOfGodAbility).ToString()
+                            //BlueprintTool.GetRef<BlueprintAbilityReference>(AbilityRefs.TrueJudgmentAbility.ToString()).ToString()
                         )
                     },
                     casterLevel: 0,
@@ -669,6 +929,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .AddReplaceAbilitiesStat
                 (
                     ability: new() { BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.LivingGrimoireWordOfGodAbility) },
+                    //ability: new() { BlueprintTool.GetRef<BlueprintAbilityReference>(AbilityRefs.TrueJudgmentAbility.ToString()) },
                     stat: StatType.Intelligence
                 )
                 .AddReplaceCasterLevelOfAbility
@@ -682,10 +943,19 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                     abilites: new() { BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.LivingGrimoireWordOfGodAbility) },
                     cantrip: false,
                     characterClass: CharacterClassRefs.InquisitorClass.ToString(),
+                    archetypes: new() { BlueprintTool.GetRef<BlueprintArchetypeReference>(Guids.LivingGrimoireArchetype) },
                     stat: StatType.Intelligence,
                     levelStep: 2,
                     odd: true,
                     fullCasterChecks: true
+                )
+                .AddAbilityResources
+                (
+                    useThisAsResource: false,
+                    resource: abilityResource,
+                    amount: 0,
+                    restoreAmount: true,
+                    restoreOnLevelUp: false
                 )
                 .AddPrerequisiteFeature(BlueprintTool.GetRef<BlueprintFeatureReference>(Guids.LivingGrimoireHolyBook))
                 .SetAllowNonContextActions(false)

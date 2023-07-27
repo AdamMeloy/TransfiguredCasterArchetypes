@@ -39,6 +39,19 @@
     "zhCN": null,
     "ruRU": null
   },
+  {
+    "Key": "LivingGrimoire.SacredWord.Name",
+    "ProcessTemplates": false,
+    "enGB": "Sacred Word",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.SacredWord.Description",
+    "enGB": "At 2nd level, a living grimoire learns to charge his holy book with the power of his faith. The inquisitor gains the benefits of the warpriest’s sacred weapon class ability, but the benefits apply only to his bonded holy book. Like a warpriest’s sacred weapon, the living grimoire’s book deals {g|Encyclopedia:Damage}damage{/g} based on the inquisitor’s level, not the book’s base {g|Encyclopedia:Damage}damage{/g} (unless the inquisitor chooses to use the book’s base {g|Encyclopedia:Damage}damage{/g}).",
+    "zhCN": null,
+    "ruRU": null
+  },
 
   {
     "Key": "LivingGrimoire.WordOfGod.Name",
