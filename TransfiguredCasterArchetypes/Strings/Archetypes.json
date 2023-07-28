@@ -40,6 +40,19 @@
     "ruRU": null
   },
   {
+    "Key": "LivingGrimoire.HolyBook.WeaponFocus.Name",
+    "ProcessTemplates": false,
+    "enGB": "Weapon Focus (Holy Book)",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.HolyBook.WeaponFocus.Description",
+    "enGB": "You gain a +1 {g|Encyclopedia:Bonus}bonus{/g} on all {g|Encyclopedia:Attack}attack rolls{/g} you make using holy books.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
     "Key": "LivingGrimoire.SacredWord.Name",
     "ProcessTemplates": false,
     "enGB": "Sacred Word",
