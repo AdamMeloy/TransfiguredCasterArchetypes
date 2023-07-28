@@ -909,7 +909,6 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
             Logger.Log("Creating Word of God Feature");
             return FeatureConfigurator.New(WordOfGod, Guids.LivingGrimoireWordOfGod)
-            return FeatureConfigurator.New(WordOfGod, Guids.LivingGrimoireWordOfGod)
                 .AddFacts
                 (
                     facts: new()
