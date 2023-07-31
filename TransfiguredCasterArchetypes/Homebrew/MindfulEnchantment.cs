@@ -1,6 +1,8 @@
 ﻿using BlueprintCore.Blueprints.Configurators.Items.Ecnchantments;
 using BlueprintCore.Blueprints.References;
 using Kingmaker.EntitySystem.Stats;
+using Kingmaker.ResourceLinks;
+using Kingmaker.Utility;
 using System;
 using TransfiguredCasterArchetypes.Util;
 using UnityEngine;
@@ -62,6 +64,7 @@ namespace TransfiguredCasterArchetypes.Homebrew
                 .SetDescription(EnchantmentDescription)
                 .SetPrefix(Enchantment)
                 .AddWeaponDamageStatReplacement(default, default, false, StatType.Intelligence)
+                .SetWeaponFxPrefab(BlueprintCore.Utils.Constants.Empty.PrefabLink) //new, might break things
                 .Configure();
         }
 
