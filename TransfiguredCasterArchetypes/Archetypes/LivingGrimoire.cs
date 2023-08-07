@@ -46,6 +46,7 @@ using Kingmaker.RuleSystem.Rules;
 using Kingmaker.UnitLogic;
 using TransfiguredCasterArchetypes.Blueprints;
 using BuffConfigurator = BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs.BuffConfigurator;
+using Kingmaker.Designers.Mechanics.Facts;
 
 namespace TransfiguredCasterArchetypes.Archetypes {
 	static class LivingGrimoire {
@@ -759,13 +760,19 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         #endregion
 
         #region Blessed Script
-        /*
+        
         private static BlueprintFeature CreateBlessedScript5()
         {
+            var s = SpellbookConfigurator.For(Guids.LivingGrimoireSpellbook)
+                .SetHasSpecialSpellList(true)
+                .SetSpecialSpellListName("Blessed Script")
+                .Configure();
+
             return FeatureConfigurator.New(BlessedScript5, Guids.BlessedScript5)
+
                 .Configure();
         }
-
+        /*
         private static BlueprintFeature CreateBlessedScript8()
         {
             return FeatureConfigurator.New(BlessedScript8, Guids.BlessedScript8)
