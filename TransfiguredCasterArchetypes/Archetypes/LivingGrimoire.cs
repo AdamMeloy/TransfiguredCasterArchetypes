@@ -46,6 +46,9 @@ using Kingmaker.RuleSystem.Rules;
 using Kingmaker.UnitLogic;
 using TransfiguredCasterArchetypes.Blueprints;
 using BuffConfigurator = BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs.BuffConfigurator;
+using Kingmaker.Designers.Mechanics.Facts;
+using static Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityResourceLogic;
+using Kingmaker.UnitLogic.ActivatableAbilities;
 
 namespace TransfiguredCasterArchetypes.Archetypes {
 	static class LivingGrimoire {
@@ -76,13 +79,23 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         internal const string SacredWordWeaponSwitch = "LivingGrimoire.SacredWordWeaponSwitch";
         internal const string SacredWordBaseDamageFeature = "LivingGrimoire.SacredWordBaseDamageFeature";
+        internal const string SacredWordOnBuff = "LivingGrimoire.SacredWordOnBuff";
+        internal const string SacredWordOnAbility = "LivingGrimoire.SacredWordOnAbility";
+        internal const string SacredWordEnchantSwitchAbility = "LivingGrimoire.SacredWordEnchantSwitchAbility";
+        internal const string SacredWordEnchantResource = "LivingGrimoire.SacredWordEnchantResource";
         internal const string SacredWordEnchantFeature = "LivingGrimoire.SacredWordEnchantFeature";
+        internal const string SacredWordEnchantDescription = "LivingGrimoire.SacredWordEnchant.Description";
         internal const string SacredWordEnchantPlus2 = "LivingGrimoire.SacredWordEnchantPlus2";
+        internal const string SacredWordEnchantPlus2Name = "LivingGrimoire.SacredWordEnchantPlus2.Name";
         internal const string SacredWordEnchantPlus3 = "LivingGrimoire.SacredWordEnchantPlus3";
+        internal const string SacredWordEnchantPlus3Name = "LivingGrimoire.SacredWordEnchantPlus3.Name";
         internal const string SacredWordEnchantPlus4 = "LivingGrimoire.SacredWordEnchantPlus4";
+        internal const string SacredWordEnchantPlus4Name = "LivingGrimoire.SacredWordEnchantPlus4.Name";
         internal const string SacredWordEnchantPlus5 = "LivingGrimoire.SacredWordEnchantPlus5";
+        internal const string SacredWordEnchantPlus5Name = "LivingGrimoire.SacredWordEnchantPlus5.Name";
 
-        internal const string BlessedScript = "LivingGrimoire.BlessedScript";
+        internal const string BlessedScriptName = "LivingGrimoire.BlessedScript.Name";
+        internal const string BlessedScriptDescription = "LivingGrimoire.BlessedScript.Description";
         internal const string BlessedScript5 = "LivingGrimoire.BlessedScript5";
         internal const string BlessedScript8 = "LivingGrimoire.BlessedScript8";
         internal const string BlessedScript12 = "LivingGrimoire.BlessedScript12";
@@ -168,12 +181,12 @@ namespace TransfiguredCasterArchetypes.Archetypes {
             FeatureConfigurator.New(SacredWord, Guids.LivingGrimoireSacredWord).Configure();
             ActivatableAbilityConfigurator.New(SacredWordWeaponSwitch, Guids.SacredWordWeaponSwitch).Configure();
             FeatureConfigurator.New(SacredWordBaseDamageFeature, Guids.SacredWordBaseDamageFeature).Configure();
-/*            FeatureConfigurator.New(SacredWordEnchantFeature, Guids.SacredWordEnchantFeature).Configure();
+            FeatureConfigurator.New(SacredWordEnchantFeature, Guids.SacredWordEnchantFeature).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus2, Guids.SacredWordEnchantPlus2).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus3, Guids.SacredWordEnchantPlus3).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus4, Guids.SacredWordEnchantPlus4).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus5, Guids.SacredWordEnchantPlus5).Configure();
-            FeatureConfigurator.New(BlessedScript, Guids.LivingGrimoireBlessedScript).Configure();
+/*            FeatureConfigurator.New(BlessedScript, Guids.LivingGrimoireBlessedScript).Configure();
             FeatureConfigurator.New(BlessedScript5, Guids.BlessedScript5).Configure();
             FeatureConfigurator.New(BlessedScript8, Guids.BlessedScript8).Configure();
             FeatureConfigurator.New(BlessedScript12, Guids.BlessedScript12).Configure();
@@ -219,13 +232,13 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
             archetype
                 .AddToAddFeatures(level: 1, CreateCantrips(), CreateHolyBook())
-                .AddToAddFeatures(level: 2, CreateSacredWordAbility(), CreateSacredWord())/*
+                .AddToAddFeatures(level: 2, /*CreateSacredWordAbility(), */CreateSacredWord())
                 .AddToAddFeatures(level: 4, CreateSacredWordEnchant())
-                .AddToAddFeatures(level: 5, CreateBlessedScript5())
-                .AddToAddFeatures(level: 8, CreateSacredWordPlus2(), CreateBlessedScript8())
-                .AddToAddFeatures(level: 12, CreateSacredWordPlus3(), CreateBlessedScript12())
-                .AddToAddFeatures(level: 16, CreateSacredWordPlus4(), CreateBlessedScript16())*/
-                .AddToAddFeatures(level: 20, CreateWordOfGod()/*, CreateSacredWordPlus5()*/);
+                //.AddToAddFeatures(level: 5, CreateBlessedScript5())
+                .AddToAddFeatures(level: 8, CreateSacredWordPlus2()/*, CreateBlessedScript8()*/)
+                .AddToAddFeatures(level: 12, CreateSacredWordPlus3()/*, CreateBlessedScript12()*/)
+                .AddToAddFeatures(level: 16, CreateSacredWordPlus4()/*, CreateBlessedScript16()*/)
+                .AddToAddFeatures(level: 20, CreateWordOfGod(), CreateSacredWordPlus5());
 
             archetype.Configure();
         }
@@ -410,9 +423,15 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 (
                     new()
                     {
-                        AbilityRefs.Daze.ToString(), AbilityRefs.Resistance.ToString(), AbilityRefs.MageLight.ToString(),
-                        AbilityRefs.AcidSplash.ToString(), AbilityRefs.DisruptUndead.ToString(), AbilityRefs.Virtue.ToString(),
-                        AbilityRefs.Guidance.ToString(), AbilityRefs.DivineZap.ToString(), AbilityRefs.DismissAreaEffect.ToString()
+                        AbilityRefs.Daze.ToString(),
+                        AbilityRefs.Resistance.ToString(),
+                        AbilityRefs.MageLight.ToString(),
+                        AbilityRefs.AcidSplash.ToString(),
+                        AbilityRefs.DisruptUndead.ToString(),
+                        AbilityRefs.Virtue.ToString(),
+                        AbilityRefs.Guidance.ToString(),
+                        AbilityRefs.DivineZap.ToString(),
+                        AbilityRefs.DismissAreaEffect.ToString()
                     }
                 )
                 .SetIsClassFeature(true)
@@ -463,7 +482,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         #region Sacred Word
 
-        private static BlueprintFeature CreateSacredWordAbility()
+        private static BlueprintFeature CreateSacredWord()
         {
             Logger.Log($"Creating Weapon Buffs For {Guids.LivingGrimoireSacredWord}");
             Blueprints.BuffConfigurator.New(SacredWordBuff1d6, Guids.SacredWordBuff1d6)
@@ -537,6 +556,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetFrequency(DurationRate.Rounds)
                 .Configure();
 
+            ///TODO: still uh, broken
             Logger.Log($"Creating Buff Base Feature For {Guids.LivingGrimoireSacredWord}");
             BuffConfigurator.New(SacredWordBuffBase, Guids.SacredWordBuffBase)
                 .CopyFrom(BuffRefs.WarpriestSacredWeaponBuffBase)
@@ -703,7 +723,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 (
                     facts: new()
                     {
-                        BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.SacredWordWeaponSwitch).ToString()
+                        Guids.SacredWordWeaponSwitch.ToString()
                     }
                 )
                 .SetDisplayName(SacredWordName)
@@ -711,7 +731,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .Configure();
         }
 
-        private static BlueprintFeature CreateSacredWord()
+        private static BlueprintFeature CreateSacredWordAbility()
         {
             return FeatureConfigurator.New(SacredWord, Guids.LivingGrimoireSacredWord)
                 .SetDisplayName(SacredWordName)
@@ -726,61 +746,174 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .Configure();
         }
 
-        /*
+        
         private static BlueprintFeature CreateSacredWordEnchant()
         {
+            AbilityResourceConfigurator.New(SacredWordEnchantResource, Guids.SacredWordEnchantResource)
+                .CopyFrom(AbilityResourceRefs.SacredWeaponEnchantResource)
+                .SetMaxAmount
+                (
+                    ResourceAmountBuilder.New(0)
+                    .IncreaseByLevel
+                    (
+                        classes: new[] { CharacterClassRefs.InquisitorClass.ToString() },
+                        bonusPerLevel: 1
+                    )
+                )
+                .SetMax(20)
+                .Configure();
+
+            BuffConfigurator.New(SacredWordOnBuff, Guids.SacredWordOnBuff)
+                .CopyFrom(BuffRefs.SacredWeaponOnBuff)
+                .AddFactContextActions
+                (
+                    activated: ActionsBuilder.New().CastSpell(Guids.SacredWordEnchantSwitchAbility),
+                    newRound: ActionsBuilder.New().CastSpell(Guids.SacredWordEnchantSwitchAbility)
+                )
+                .Configure();
+
+            ActivatableAbilityConfigurator.New(SacredWordOnAbility, Guids.SacredWordOnAbility)
+                .CopyFrom(ActivatableAbilityRefs.SacredWeaponOnAbility)
+                .SetDisplayName(SacredWordName)
+                .SetDescription(SacredWordEnchantDescription)
+                .AddActivatableAbilityResourceLogic
+                (
+                    spendType: ResourceSpendType.NewRound,
+                    requiredResource: Guids.SacredWordEnchantResource
+                )
+                .SetBuff(Guids.SacredWordOnBuff)
+                .Configure();
+
+            AbilityConfigurator.New(SacredWordEnchantSwitchAbility, Guids.SacredWordEnchantSwitchAbility)
+                .CopyFrom(AbilityRefs.SacredWeaponEnchantSwitchAbility)
+                .Configure();
+
             return FeatureConfigurator.New(SacredWordEnchantFeature, Guids.SacredWordEnchantFeature)
+                .CopyFrom(FeatureRefs.SacredWeaponEnchantFeature)
+                .SetDisplayName(SacredWordName)
+                .SetDescription(SacredWordEnchantDescription)
+                .AddFacts
+                (
+                    facts: new()
+                    {
+                        Guids.SacredWordEnchantSwitchAbility,
+                        Guids.SacredWordOnAbility,
+                        ActivatableAbilityRefs.SacredWeaponEnchantFlamingChoice.ToString(),
+                        ActivatableAbilityRefs.SacredWeaponEnchantFrostChoice.ToString(),
+                        ActivatableAbilityRefs.SacredWeaponEnchantShockChoice.ToString(),
+                        ActivatableAbilityRefs.SacredWeaponEnchantKeenChoice.ToString()
+                    },
+                    casterLevel: 0,
+                    doNotRestoreMissingFacts: false,
+                    hasDifficultyRequirements: false,
+                    invertDifficultyRequirements: false,
+                    minDifficulty: GameDifficultyOption.Story
+                )
+                .AddAbilityResources
+                (
+                    useThisAsResource: false,
+                    resource: Guids.SacredWordEnchantResource,
+                    amount: 0,
+                    restoreAmount: true,
+                    restoreOnLevelUp:false
+                )
                 .Configure();
         }
-
+        
         private static BlueprintFeature CreateSacredWordPlus2()
         {
             return FeatureConfigurator.New(SacredWordEnchantPlus2, Guids.SacredWordEnchantPlus2)
+                .CopyFrom(FeatureRefs.SacredWeaponEnchantPlus2)
+                .SetDisplayName(SacredWordEnchantPlus2Name)
+                .SetDescription(SacredWordEnchantDescription)
+                .AddIncreaseActivatableAbilityGroupSize(ActivatableAbilityGroup.SacredWeaponProperty)
+                .AddFacts
+                (
+                    facts: new()
+                    {
+                        ActivatableAbilityRefs.SacredWeaponEnchantAnarchicChoice.ToString(),
+                        ActivatableAbilityRefs.SacredWeaponEnchantAxiomaticChoice.ToString(),
+                        ActivatableAbilityRefs.SacredWeaponEnchantHolyChoice.ToString(),
+                        ActivatableAbilityRefs.SacredWeaponEnchantUnholyChoice.ToString()
+                    },
+                    casterLevel: 0,
+                    doNotRestoreMissingFacts: false,
+                    hasDifficultyRequirements: false,
+                    invertDifficultyRequirements: false,
+                    minDifficulty: GameDifficultyOption.Story
+
+                )
                 .Configure();
         }
 
         private static BlueprintFeature CreateSacredWordPlus3()
         {
             return FeatureConfigurator.New(SacredWordEnchantPlus3, Guids.SacredWordEnchantPlus3)
+                .CopyFrom(FeatureRefs.SacredWeaponEnchantPlus3)
+                .SetDisplayName(SacredWordEnchantPlus3Name)
+                .SetDescription(SacredWordEnchantDescription)
                 .Configure();
         }
 
         private static BlueprintFeature CreateSacredWordPlus4()
         {
             return FeatureConfigurator.New(SacredWordEnchantPlus4, Guids.SacredWordEnchantPlus4)
+                .CopyFrom(FeatureRefs.SacredWeaponEnchantPlus4)
+                .SetDisplayName(SacredWordEnchantPlus4Name)
+                .SetDescription(SacredWordEnchantDescription)
                 .Configure();
         }
 
         private static BlueprintFeature CreateSacredWordPlus5()
         {
             return FeatureConfigurator.New(SacredWordEnchantPlus5, Guids.SacredWordEnchantPlus5)
+                .CopyFrom(FeatureRefs.SacredWeaponEnchantPlus5)
+                .SetDisplayName(SacredWordEnchantPlus5Name)
+                .SetDescription(SacredWordEnchantDescription)
+                .AddFacts
+                (
+                    facts: new()
+                    {
+                        ActivatableAbilityRefs.SacredWeaponEnchantBrilliantEnergyChoice.ToString()
+                    },
+                    casterLevel: 0,
+                    doNotRestoreMissingFacts: false,
+                    hasDifficultyRequirements: false,
+                    invertDifficultyRequirements: false,
+                    minDifficulty: GameDifficultyOption.Story
+
+                )
                 .Configure();
-        }*/
+        }
         #endregion
 
         #region Blessed Script
-        /*
+        
         private static BlueprintFeature CreateBlessedScript5()
         {
-            return FeatureConfigurator.New(BlessedScript5, Guids.BlessedScript5)
+            return FeatureConfigurator.New(BlessedScript5, Guids.LivingGrimoireBlessedScript5)
+
+
+
+
                 .Configure();
         }
-
+        /*
         private static BlueprintFeature CreateBlessedScript8()
         {
-            return FeatureConfigurator.New(BlessedScript8, Guids.BlessedScript8)
+            return FeatureConfigurator.New(BlessedScript8, Guids.LivingGrimoireBlessedScript8)
                 .Configure();
         }
 
         private static BlueprintFeature CreateBlessedScript12()
         {
-            return FeatureConfigurator.New(BlessedScript12, Guids.BlessedScript12)
+            return FeatureConfigurator.New(BlessedScript12, Guids.LivingGrimoireBlessedScript12)
                 .Configure();
         }
 
         private static BlueprintFeature CreateBlessedScript16()
         {
-            return FeatureConfigurator.New(BlessedScript16, Guids.BlessedScript16)
+            return FeatureConfigurator.New(BlessedScript16, Guids.LivingGrimoireBlessedScript16)
                 .Configure();
         }*/
         #endregion
@@ -953,11 +1086,8 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 (
                     facts: new()
                     {
-                        BlueprintTool.GetRef<BlueprintUnitFactReference>
-                        (
-                            BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.LivingGrimoireWordOfGodAbility).ToString()
-                            //BlueprintTool.GetRef<BlueprintAbilityReference>(AbilityRefs.TrueJudgmentAbility.ToString()).ToString()
-                        )
+                        Guids.LivingGrimoireWordOfGodAbility.ToString()
+                        //AbilityRefs.TrueJudgmentAbility.ToString()
                     },
                     casterLevel: 0,
                     doNotRestoreMissingFacts: false,

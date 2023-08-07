@@ -65,7 +65,54 @@
     "zhCN": null,
     "ruRU": null
   },
+  {
+    "Key": "LivingGrimoire.SacredWordEnchant.Description",
+    "enGB": "At 4th level, the living grimoire gains the ability to enhance his holy book with the power of his faith as a {g|Encyclopedia:Swift_Action}swift action{/g}. This power grants the weapon a +1 enhancement {g|Encyclopedia:Bonus}bonus{/g}. For every 4 levels beyond 4th, this bonus increases by 1 (to a maximum of +5 at 20th level). The living grimoire can use this ability a number of rounds per day equal to his inquisitor level, but these rounds need not be consecutive. These bonuses stack with any existing bonuses the weapon might have, to a maximum of +5. The living grimoire can enhance his holy book with any of the following weapon special abilities: brilliant energy, flaming, frost, keen, and shock. In addition, if the living grmoire is chaotic, he can add anarchic. If he is evil, he can add unholy. If he is good, he can add holy. If he is lawful, he can add axiomatic. Adding any of these {g|Encyclopedia:Special_Abilities}special abilities{/g} replaces an amount of bonus equal to the special ability's base cost. Duplicate abilities do not stack. The weapon must have at least a +1 enhancement bonus before any other special abilities can be added.",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.SacredWordEnchantPlus2.Name",
+    "ProcessTemplates": false,
+    "enGB": "Sacred Word +2",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.SacredWordEnchantPlus3.Name",
+    "ProcessTemplates": false,
+    "enGB": "Sacred Word +3",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.SacredWordEnchantPlus4.Name",
+    "ProcessTemplates": false,
+    "enGB": "Sacred Word +4",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.SacredWordEnchantPlus5.Name",
+    "ProcessTemplates": false,
+    "enGB": "Sacred Word +5",
+    "zhCN": null,
+    "ruRU": null
+  },
 
+  {
+    "Key": "LivingGrimoire.BlessedScript.Name",
+    "ProcessTemplates": false,
+    "enGB": "Blessed Script",
+    "zhCN": null,
+    "ruRU": null
+  },
+  {
+    "Key": "LivingGrimoire.BlessedScript.Description",
+    "enGB": "At 5th level, a living grimoire can permanently tattoo one spell of 2nd level or lower from his holy book onto his body.\nAt 8th level, the living grimoire can tattoo one additional spell of 3rd level or lower upon himself.\nAt 12th level, he can tattoo one additional spell of 4th level or lower upon himself.\nAt 16th level he can tattoo a final additional spell of any level upon himself.\nThe living grimoire can cast his tattooed spells as a spell-like ability once per day.",
+    "zhCN": null,
+    "ruRU": null
+  },
   {
     "Key": "LivingGrimoire.WordOfGod.Name",
     "ProcessTemplates": false,
@@ -97,10 +144,5 @@
     "zhCN": null,
     "ruRU": null
   }
-
-
-
-
-
   // **************************** //
 ]

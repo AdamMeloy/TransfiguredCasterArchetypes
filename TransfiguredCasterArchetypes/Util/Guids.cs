@@ -35,17 +35,20 @@ namespace TransfiguredCasterArchetypes.Util
         internal const string SacredWordBuff2d6 = "15bfce87-d2ea-46bd-b89e-a97096e858d8";
         internal const string SacredWordBuff2d8 = "7d5ed577-1d7c-48a3-bd58-206a02b9203e";
 
+        internal const string SacredWordOnBuff = "8d02bdaa-24fe-4bf5-a91c-57080f765b85";
+        internal const string SacredWordOnAbility = "ac00a980-6d1f-4f9c-80f4-da99148fba5c";
+        internal const string SacredWordEnchantSwitchAbility = "aa8a52c2-bd32-4860-b7f0-20e30dab105b";
         internal const string SacredWordEnchantFeature = "de049b6b-0cf7-463e-ab14-7e49d7e58799";
+        internal const string SacredWordEnchantResource = "7daa5558-26b7-4f56-b8ce-c666dbb07a7f";
         internal const string SacredWordEnchantPlus2 = "6fbf5c44-4072-4879-afb0-c159fb9c7b3a";
         internal const string SacredWordEnchantPlus3 = "c74e71fc-1f9a-432e-9fc9-29d129045cde";
         internal const string SacredWordEnchantPlus4 = "a7876ca7-09b6-4789-9b0a-bf1841226e9e";
         internal const string SacredWordEnchantPlus5 = "55a81ea1-177d-4331-8a0d-aa8d9b870d93";
 
-        internal const string LivingGrimoireBlessedScript = "d087f299-a495-4a9f-9b01-6f9190189423";
-        internal const string BlessedScript5 = "b1b045b8-829d-4850-8ecc-e025458074d4";
-        internal const string BlessedScript8 = "1ddfc107-50be-435d-a833-0b5ed4b76164";
-        internal const string BlessedScript12 = "9c7c9470-4ec0-47e2-b441-30de3f78d3a8";
-        internal const string BlessedScript16 = "80e813f9-ddf6-4426-aae4-1d53d6314354";
+        internal const string LivingGrimoireBlessedScript5 = "b1b045b8-829d-4850-8ecc-e025458074d4";
+        internal const string LivingGrimoireBlessedScript8 = "1ddfc107-50be-435d-a833-0b5ed4b76164";
+        internal const string LivingGrimoireBlessedScript12 = "9c7c9470-4ec0-47e2-b441-30de3f78d3a8";
+        internal const string LivingGrimoireBlessedScript16 = "80e813f9-ddf6-4426-aae4-1d53d6314354";
         internal const string LivingGrimoireWordOfGod = "f2e47e4f-259d-48a6-a743-fb404a4e0fee";
         internal const string LivingGrimoireWordOfGodAbility = "70668bfc-b86b-420e-a9ba-78a8ee61ac15";
         internal const string LivingGrimoireWordOfGodResource = "f68cccbe-a8e0-4453-9aca-05ce932d6c0e";
