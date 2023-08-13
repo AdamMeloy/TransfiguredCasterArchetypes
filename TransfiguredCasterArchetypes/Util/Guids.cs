@@ -45,6 +45,7 @@ namespace TransfiguredCasterArchetypes.Util
         internal const string SacredWordEnchantPlus4 = "a7876ca7-09b6-4789-9b0a-bf1841226e9e";
         internal const string SacredWordEnchantPlus5 = "55a81ea1-177d-4331-8a0d-aa8d9b870d93";
 
+        internal const string LivingGrimoireBlessedScriptTable = "e91e03a3-2873-4fe1-b5a4-9872b0f103ed";
         internal const string LivingGrimoireBlessedScript5 = "b1b045b8-829d-4850-8ecc-e025458074d4";
         internal const string LivingGrimoireBlessedScript8 = "1ddfc107-50be-435d-a833-0b5ed4b76164";
         internal const string LivingGrimoireBlessedScript12 = "9c7c9470-4ec0-47e2-b441-30de3f78d3a8";

@@ -109,7 +109,7 @@
   },
   {
     "Key": "LivingGrimoire.BlessedScript.Description",
-    "enGB": "At 5th level, a living grimoire can permanently tattoo one spell of 2nd level or lower from his holy book onto his body.\nAt 8th level, the living grimoire can tattoo one additional spell of 3rd level or lower upon himself.\nAt 12th level, he can tattoo one additional spell of 4th level or lower upon himself.\nAt 16th level he can tattoo a final additional spell of any level upon himself.\nThe living grimoire can cast his tattooed spells as a spell-like ability once per day.",
+    "enGB": "At 5th level, a living grimoire can permanently tattoo a conduit of his holy book onto his body, granting him an additional 1st spell slot.\nAt 8th level, the living grimoire can tattoo one conduit of 2nd level upon himself.\nAt 12th level, he can tattoo one conduit of 3rd level upon himself.\nAt 16th level he can tattoo one conduit of 4th level upon himself.",
     "zhCN": null,
     "ruRU": null
   },
