@@ -108,7 +108,7 @@ namespace TransfiguredCasterArchetypes.Util
             return $"{RootKey}.{partialKey}";
         }
 
-        private static readonly List<string> DefaultDisabled = new() { Guids.InvestigatorClass };
+        private static readonly List<string> DefaultDisabled = new() {  };
         private static bool GetDefault(string key)
         {
             return !DefaultDisabled.Contains(key);
