@@ -1,8 +1,6 @@
 ﻿using BlueprintCore.Blueprints.Configurators.Items.Ecnchantments;
 using BlueprintCore.Blueprints.References;
 using Kingmaker.EntitySystem.Stats;
-using Kingmaker.ResourceLinks;
-using Kingmaker.Utility;
 using System;
 using TransfiguredCasterArchetypes.Util;
 using UnityEngine;

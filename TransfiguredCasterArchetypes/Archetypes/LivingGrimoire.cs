@@ -14,7 +14,6 @@ using TransfiguredCasterArchetypes.Util;
 using CharacterOptionsPlus.Util;
 using BlueprintCore.Utils.Types;
 using TabletopTweaks.Core.NewComponents;
-using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs;
 using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Abilities;
 using Kingmaker.UnitLogic.Buffs.Blueprints;
 using Kingmaker.UnitLogic.Mechanics;
@@ -31,11 +30,8 @@ using Kingmaker.UnitLogic.Commands.Base;
 using Kingmaker.Blueprints.JsonSystem.Converters;
 using UnityEngine;
 using BlueprintCore.Blueprints.CustomConfigurators;
-using Kingmaker.Blueprints.Classes.Selection;
-using BlueprintCore.Blueprints.Configurators.Classes.Selection;
 using Kingmaker.UnitLogic.Abilities;
 using Kingmaker.RuleSystem;
-using ValueType = Kingmaker.UnitLogic.Mechanics.ValueType;
 using Kingmaker.UnitLogic.Abilities.Components;
 using BlueprintCore.Blueprints.Configurators.UnitLogic.ActivatableAbilities;
 using Kingmaker.UnitLogic.Mechanics.Components;
@@ -44,48 +40,39 @@ using Kingmaker.Blueprints.JsonSystem;
 using Kingmaker.PubSubSystem;
 using Kingmaker.RuleSystem.Rules;
 using Kingmaker.UnitLogic;
-using TransfiguredCasterArchetypes.Blueprints;
 using BuffConfigurator = BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs.BuffConfigurator;
 using Kingmaker.Designers.Mechanics.Facts;
 using static Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityResourceLogic;
 using Kingmaker.UnitLogic.ActivatableAbilities;
-using System.Collections.Generic;
-using Owlcat.Runtime.Core.Physics.PositionBasedDynamics.Forces;
 using Kingmaker.UnitLogic.FactLogic;
 using System.ComponentModel;
 
 namespace TransfiguredCasterArchetypes.Archetypes {
 	static class LivingGrimoire {
-
         internal const string ArchetypeName = "LivingGrimoire";
         internal const string ArchetypeDisplayName = "LivingGrimoire.Name";
         internal const string ArchetypeDescription = "LivingGrimoire.Description";
-
         internal const string HolyBook = "LivingGrimoire.HolyBook";
         internal const string HolyBookName = "LivingGrimoire.HolyBook.Name";
         internal const string HolyBookDescription = "LivingGrimoire.HolyBook.Description";
-        internal const string WeaponFocusHolyBook = "LivingGrimoire.HolyBook.WeaponFocus";
-        internal const string WeaponFocusHolyBookName = "LivingGrimoire.HolyBook.WeaponFocus.Name";
-        internal const string WeaponFocusHolyBookDescription = "LivingGrimoire.HolyBook.WeaponFocus.Description";
 
         internal const string SacredWord = "LivingGrimoire.SacredWord";
         internal const string SacredWordName = "LivingGrimoire.SacredWord.Name";
         internal const string SacredWordDescription = "LivingGrimoire.SacredWord.Description";
-
         internal const string SacredWordBuffBase = "LivingGrimoire.SacredWord.Buff";
         internal const string SacredWordBuff1d6 = "LivingGrimoire.SacredWord.Buff.1d6";
         internal const string SacredWordBuff1d8 = "LivingGrimoire.SacredWord.Buff.1d8";
         internal const string SacredWordBuff1d10 = "LivingGrimoire.SacredWord.Buff.1d10";
         internal const string SacredWordBuff2d6 = "LivingGrimoire.SacredWord.Buff.2d6";
         internal const string SacredWordBuff2d8 = "LivingGrimoire.SacredWord.Buff.2d8";
-
-        internal const string SacredWordWeaponSwitch = "LivingGrimoire.SacredWordWeaponSwitch";
-        internal const string SacredWordBaseDamageFeature = "LivingGrimoire.SacredWordBaseDamageFeature";
+        internal const string SacredWordSwitch = "LivingGrimoire.SacredWordWeaponSwitch";
+        internal const string SacredWordBaseDamage = "LivingGrimoire.SacredWordBaseDamage";
         internal const string SacredWordOnBuff = "LivingGrimoire.SacredWordOnBuff";
         internal const string SacredWordOnAbility = "LivingGrimoire.SacredWordOnAbility";
-        internal const string SacredWordEnchantSwitchAbility = "LivingGrimoire.SacredWordEnchantSwitchAbility";
+
+        internal const string SacredWordEnchantSwitch = "LivingGrimoire.SacredWordEnchantSwitch";
         internal const string SacredWordEnchantResource = "LivingGrimoire.SacredWordEnchantResource";
-        internal const string SacredWordEnchantFeature = "LivingGrimoire.SacredWordEnchantFeature";
+        internal const string SacredWordEnchant = "LivingGrimoire.SacredWordEnchant";
         internal const string SacredWordEnchantDescription = "LivingGrimoire.SacredWordEnchant.Description";
         internal const string SacredWordEnchantPlus2 = "LivingGrimoire.SacredWordEnchantPlus2";
         internal const string SacredWordEnchantPlus2Name = "LivingGrimoire.SacredWordEnchantPlus2.Name";
@@ -98,11 +85,14 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         internal const string BlessedScriptName = "LivingGrimoire.BlessedScript.Name";
         internal const string BlessedScriptDescription = "LivingGrimoire.BlessedScript.Description";
-        internal const string BlessedScriptTable = "LivingGrimoire.BlessedScript.Table";
         internal const string BlessedScript5 = "LivingGrimoire.BlessedScript5";
+        internal const string BlessedScript5Table = "LivingGrimoire.BlessedScript5.Table";
         internal const string BlessedScript8 = "LivingGrimoire.BlessedScript8";
+        internal const string BlessedScript8Table = "LivingGrimoire.BlessedScript8.Table";
         internal const string BlessedScript12 = "LivingGrimoire.BlessedScript12";
+        internal const string BlessedScript12Table = "LivingGrimoire.BlessedScript12.Table";
         internal const string BlessedScript16 = "LivingGrimoire.BlessedScript16";
+        internal const string BlessedScript16Table = "LivingGrimoire.BlessedScript16.Table";
 
         internal const string WordOfGod = "LivingGrimoire.WordOfGod";
         internal const string WordOfGodName = "LivingGrimoire.WordOfGod.Name";
@@ -111,27 +101,23 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         internal const string WordOfGodResource = "LivingGrimoire.WordOfGod.Resource";
         internal const string WordOfGodBuff = "LivingGrimoire.WordOfGod.Buff";
 
-        internal const string SacredWordEnchantBaneChoice = "";
-        internal const string SacredWordEnchantBaneBuff = "";
-
-
         internal const string LivingGrimoireProficiencies = "LivingGrimoire.Proficiencies";
-
         internal const string LivingGrimoireSpellbook = "LivingGrimoire.Spellbook";
-
         internal const string LivingGrimoireCantrips = "LivingGrimoire.Orisons";
         internal const string LivingGrimoireCantripsName = "LivingGrimoire.Orisons.Name";
         internal const string LivingGrimoireCantripsDescription = "LivingGrimoire.Orisons.Description";
 
-        internal const string HellknightSigniferLivingGrimoire = "LivingGrimoire.HellknightSignifer";
-        internal const string HellknightSigniferLivingGrimoireDescription = "LivingGrimoire.HellknightSignifer.Description";
-
-        internal const string LoremasterLivingGrimoire = "LivingGrimoire.Loremaster";
-        internal const string LoremasterLivingGrimoireDescription = "LivingGrimoire.Loremaster.Description";
-
         internal const string MysticTheurgeLivingGrimoireLevelUp = "LivingGrimoire.MysticTheurge.LevelUp";
         internal const string MysticTheurgeLivingGrimoire = "LivingGrimoire.MysticTheurge";
         internal const string MysticTheurgeLivingGrimoireDescription = "LivingGrimoire.MysticTheurge.Description";
+        internal const string HellknightSigniferLivingGrimoire = "LivingGrimoire.HellknightSignifer";
+        internal const string HellknightSigniferLivingGrimoireDescription = "LivingGrimoire.HellknightSignifer.Description";
+        internal const string LoremasterLivingGrimoire = "LivingGrimoire.Loremaster";
+        internal const string LoremasterLivingGrimoireDescription = "LivingGrimoire.Loremaster.Description";
+
+        internal const string WeaponFocusHolyBook = "LivingGrimoire.HolyBook.WeaponFocus";
+        internal const string WeaponFocusHolyBookName = "LivingGrimoire.HolyBook.WeaponFocus.Name";
+        internal const string WeaponFocusHolyBookDescription = "LivingGrimoire.HolyBook.WeaponFocus.Description";
 
         internal static readonly Logging.Logger Logger = Logging.GetLogger(ArchetypeName);
 
@@ -181,20 +167,19 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
             FeatureConfigurator.New(LivingGrimoireCantrips, Guids.LivingGrimoireCantrips).Configure();
             FeatureConfigurator.New(HolyBook, Guids.LivingGrimoireHolyBook).Configure();
-            FeatureConfigurator.New(SacredWord, Guids.LivingGrimoireSacredWord).Configure();
-            ActivatableAbilityConfigurator.New(SacredWordWeaponSwitch, Guids.SacredWordWeaponSwitch).Configure();
-            FeatureConfigurator.New(SacredWordBaseDamageFeature, Guids.SacredWordBaseDamageFeature).Configure();
-            FeatureConfigurator.New(SacredWordEnchantFeature, Guids.SacredWordEnchantFeature).Configure();
+            FeatureConfigurator.New(SacredWord, Guids.SacredWord).Configure();
+            ActivatableAbilityConfigurator.New(SacredWordSwitch, Guids.SacredWordSwitch).Configure();
+            FeatureConfigurator.New(SacredWordBaseDamage, Guids.SacredWordBaseDamage).Configure();
+            FeatureConfigurator.New(SacredWordEnchant, Guids.SacredWordEnchant).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus2, Guids.SacredWordEnchantPlus2).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus3, Guids.SacredWordEnchantPlus3).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus4, Guids.SacredWordEnchantPlus4).Configure();
             FeatureConfigurator.New(SacredWordEnchantPlus5, Guids.SacredWordEnchantPlus5).Configure();
-/*            FeatureConfigurator.New(BlessedScript, Guids.LivingGrimoireBlessedScript).Configure();
             FeatureConfigurator.New(BlessedScript5, Guids.BlessedScript5).Configure();
             FeatureConfigurator.New(BlessedScript8, Guids.BlessedScript8).Configure();
             FeatureConfigurator.New(BlessedScript12, Guids.BlessedScript12).Configure();
             FeatureConfigurator.New(BlessedScript16, Guids.BlessedScript16).Configure();
-*/            FeatureConfigurator.New(WordOfGod, Guids.LivingGrimoireWordOfGod).Configure();
+            FeatureConfigurator.New(WordOfGod, Guids.WordOfGod).Configure();
         }
 
         private static void ConfigureEnabled()
@@ -253,7 +238,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
             Logger.Log("Patching TTT Loremaster compatbility for Living Grimoire");
             FeatureSelectionConfigurator.For(Guids.TTTLoremasterSpellbookSelection)
-                .AddToAllFeatures(Guids.LoremasterLivingGrimoire)
+                .AddToAllFeatures(Guids.LivingGrimoireLoremaster)
                 .SkipAddToSelections()
                 .Configure();
         }
@@ -261,42 +246,11 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         #region Spells
         private static BlueprintSpellbook CreateSpellbook()
         {
-            SpellsTableConfigurator.New(BlessedScriptTable, Guids.LivingGrimoireBlessedScriptTable)
-                .SetLevels
-                (
-                    new SpellsLevelEntry[]
-                    {
-                        new SpellsLevelEntry(),                                         //0
-                        new SpellsLevelEntry{Count = new int[]{0, 1}},                  //1
-                        new SpellsLevelEntry{Count = new int[]{0, 2}},                  //2
-                        new SpellsLevelEntry{Count = new int[]{0, 3}},                  //3
-                        new SpellsLevelEntry{Count = new int[]{0, 3, 1}},               //4
-                        new SpellsLevelEntry{Count = new int[]{0, 5, 2}},               //5
-                        new SpellsLevelEntry{Count = new int[]{0, 5, 3}},               //6
-                        new SpellsLevelEntry{Count = new int[]{0, 5, 3, 1}},            //7
-                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 2}},            //8
-                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 3}},            //9
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 3, 1}},         //10
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 2}},         //11
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 3}},         //12
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 3, 1}},      //13
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 2}},      //14
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 3}},      //15
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 3, 1}},   //16
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 4, 2}},   //17
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 4, 3}},   //18
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 6, 5, 4}},   //19
-                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 6, 5, 5}}    //20
-                    }
-                )
-                .Configure();
-
+            Logger.Log("Creating Living Grimoire Spellbook");
             var spellbook = SpellbookConfigurator.New(LivingGrimoireSpellbook, Guids.LivingGrimoireSpellbook)
                 .CopyFrom(SpellbookRefs.InquisitorSpellbook, typeof(NameModifier))
                 .SetIsMythic(false)
-                .SetSpellsPerDay(Guids.LivingGrimoireBlessedScriptTable)
                 .SetSpellsKnown(null)
-                .SetSpellSlots(Guids.LivingGrimoireBlessedScriptTable)
                 .SetSpellList(SpellListRefs.InquisitorSpellList.ToString())
                 .SetCharacterClass(CharacterClassRefs.InquisitorClass.ToString())
                 .SetCastingAttribute(StatType.Intelligence)
@@ -313,14 +267,18 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
             var inquisitor = CharacterClassRefs.InquisitorClass.ToString();
 
-            // Mystic Theurge Support
-            Logger.Log($"Restricting {Guids.LivingGrimoireArchetype} from using {inquisitor} Progression");
+            Logger.Log("Living Grimoire Mystic Theurge Support");
+            Logger.Log("Restricting Base Class and other Archetypes from using LG's Progression");
             ProgressionConfigurator.For(ProgressionRefs.MysticTheurgeInquisitorProgression)
-                .AddPrerequisiteNoArchetype(characterClass: inquisitor, archetype: Guids.LivingGrimoireArchetype)
+                .AddPrerequisiteNoArchetype
+                (
+                    characterClass: CharacterClassRefs.InquisitorClass.ToString(),
+                    archetype: Guids.LivingGrimoireArchetype
+                )
                 .Configure();
 
-            Logger.Log($"Creating {Guids.MysticTheurgeLivingGrimoire} LevelUp Feature");
-            var mtLGL = FeatureConfigurator.New(MysticTheurgeLivingGrimoireLevelUp, Guids.MysticTheurgeLivingGrimoireLevelUp)
+            Logger.Log("Creating LG's Mystic Theurge LevelUp Feature");
+            var mtLGL = FeatureConfigurator.New(MysticTheurgeLivingGrimoireLevelUp, Guids.LivingGrimoireMysticTheurgeLevelUp)
                 .AddSpellbookLevel(spellbook)
                 .SetDisplayName(ArchetypeDisplayName)
                 .SetDescription(MysticTheurgeLivingGrimoireDescription)
@@ -334,11 +292,18 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .Configure();
             var mtLGLS = mtLGL.ToString();
 
-            Logger.Log($"Creating {Guids.MysticTheurgeLivingGrimoire} Progression");
-
-            var mtLG = ProgressionConfigurator.New(MysticTheurgeLivingGrimoire, Guids.MysticTheurgeLivingGrimoire)
-                .AddPrerequisiteClassSpellLevel(characterClass: CharacterClassRefs.InquisitorClass.ToString(), requiredSpellLevel: 2)
-                .AddMysticTheurgeSpellbook(characterClass: CharacterClassRefs.InquisitorClass.ToString(), mysticTheurge: CharacterClassRefs.MysticTheurgeClass.ToString())
+            Logger.Log("Creating LG's Mystic Theurge Spellbook Progression");
+            var mtLG = ProgressionConfigurator.New(MysticTheurgeLivingGrimoire, Guids.LivingGrimoireMysticTheurge)
+                .AddPrerequisiteClassSpellLevel
+                (
+                    characterClass: CharacterClassRefs.InquisitorClass.ToString(),
+                    requiredSpellLevel: 2
+                )
+                .AddMysticTheurgeSpellbook
+                (
+                    characterClass: CharacterClassRefs.InquisitorClass.ToString(),
+                    mysticTheurge: CharacterClassRefs.MysticTheurgeClass.ToString()
+                )
                 .SetDisplayName(ArchetypeDisplayName)
                 .SetDescription(MysticTheurgeLivingGrimoireDescription)
                 .SetHideInUI(true)
@@ -348,7 +313,17 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetRanks(1)
                 .SetReapplyOnLevelUp(false)
                 .SetIsClassFeature(true)
-                .SetClasses((CharacterClassRefs.MysticTheurgeClass.ToString(), 0), (CharacterClassRefs.InquisitorClass.ToString(), 0))
+                .SetClasses
+                (
+                    (
+                        CharacterClassRefs.MysticTheurgeClass.ToString(),
+                        0
+                    ),
+                    (
+                        CharacterClassRefs.InquisitorClass.ToString(),
+                        0
+                    )
+                )
                 .SetArchetypes(Guids.LivingGrimoireArchetype.ToString())
                 .SetForAllOtherClasses(false)
                 .SetLevelEntries(
@@ -374,23 +349,34 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetGiveFeaturesForPreviousLevels(false)
                 .Configure();
 
-            Logger.Log($"Adding {Guids.MysticTheurgeLivingGrimoire} Spellbook to {FeatureSelectionRefs.MysticTheurgeDivineSpellbookSelection.ToString()}");
+            Logger.Log("Adding LG Spellbook to Mystic Theurge Spellbook Selection");
             FeatureSelectionConfigurator.For(FeatureSelectionRefs.MysticTheurgeDivineSpellbookSelection.ToString())
                 .AddToAllFeatures(mtLG)
                 .SkipAddToSelections()
                 .Configure();
 
-            // Hellknight Signifer Support
-            Logger.Log("Adding Archetype Spellbook for Hellknight Signifer");
-            Logger.Log($"Restricting {Guids.LivingGrimoireArchetype} from using {inquisitor} Progression");
+            Logger.Log("Living Grimoire Hellknight Signifer Support");
+            Logger.Log("Restricting Base Class and other Archetypes from using LG's Progression");
             ProgressionConfigurator.For(ProgressionRefs.HellknightSigniferInquisitorProgression)
-                .AddPrerequisiteNoArchetype(characterClass: inquisitor, archetype: Guids.LivingGrimoireArchetype)
+                .AddPrerequisiteNoArchetype
+                (
+                    characterClass: inquisitor,
+                    archetype: Guids.LivingGrimoireArchetype
+                )
                 .Configure();
 
-            Logger.Log($"Creating {Guids.HellknightSigniferLivingGrimoire} Spellbook from Class Progression");
-            var replacementHS = FeatureReplaceSpellbookConfigurator.New(HellknightSigniferLivingGrimoire, Guids.HellknightSigniferLivingGrimoire)
-                .AddPrerequisiteClassSpellLevel(characterClass: inquisitor, requiredSpellLevel: 3)
-                .AddPrerequisiteArchetypeLevel(characterClass: inquisitor, archetype: Guids.LivingGrimoireArchetype)
+            Logger.Log("Creating LG's Hellknight Signifer Spellbook Progression");
+            var replacementHS = FeatureReplaceSpellbookConfigurator.New(HellknightSigniferLivingGrimoire, Guids.LivingGrimoireHellknightSignifer)
+                .AddPrerequisiteClassSpellLevel
+                (
+                    characterClass: inquisitor,
+                    requiredSpellLevel: 3
+                )
+                .AddPrerequisiteArchetypeLevel
+                (
+                    characterClass: inquisitor,
+                    archetype: Guids.LivingGrimoireArchetype
+                )
                 .SetDisplayName(ArchetypeDisplayName)
                 .SetDescription(HellknightSigniferLivingGrimoireDescription)
                 .SetHideInUI(true)
@@ -403,23 +389,34 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetSpellbook(spellbook)
                 .Configure();
 
-            Logger.Log($"Adding {Guids.HellknightSigniferLivingGrimoire} Spellbook to {FeatureSelectionRefs.HellknightSigniferSpellbook.ToString()}");
+            Logger.Log("Adding LG Spellbook to Hellknight Signifer Spellbook");
             FeatureSelectionConfigurator.For(FeatureSelectionRefs.HellknightSigniferSpellbook.ToString())
                 .AddToAllFeatures(replacementHS)
                 .SkipAddToSelections()
                 .Configure();
 
-            // Loremaster Support
-            Logger.Log("Adding Archetype Spellbook for Loremaster");
-            Logger.Log($"Restricting {Guids.LivingGrimoireArchetype} from using {inquisitor} Progression");
+            Logger.Log("Living Grimoire Loremaster Support");
+            Logger.Log("Restricting Base Class and other Archetypes from using LG's Progression");
             ProgressionConfigurator.For(ProgressionRefs.LoremasterInquisitorProgression)
-                .AddPrerequisiteNoArchetype(characterClass: inquisitor, archetype: Guids.LivingGrimoireArchetype)
+                .AddPrerequisiteNoArchetype
+                (
+                    characterClass: inquisitor,
+                    archetype: Guids.LivingGrimoireArchetype
+                )
                 .Configure();
 
-            Logger.Log($"Creating {Guids.LoremasterLivingGrimoire} Spellbook from Class Progression");
-            var replacementLM = FeatureReplaceSpellbookConfigurator.New(LoremasterLivingGrimoire, Guids.LoremasterLivingGrimoire)
-                .AddPrerequisiteClassSpellLevel(characterClass: inquisitor, requiredSpellLevel: 3)
-                .AddPrerequisiteArchetypeLevel(characterClass: inquisitor, archetype: Guids.LivingGrimoireArchetype)
+            Logger.Log("Creating LG's Loremaster Spellbook Progression");
+            var replacementLM = FeatureReplaceSpellbookConfigurator.New(LoremasterLivingGrimoire, Guids.LivingGrimoireLoremaster)
+                .AddPrerequisiteClassSpellLevel
+                (
+                    characterClass: inquisitor,
+                    requiredSpellLevel: 3
+                )
+                .AddPrerequisiteArchetypeLevel
+                (
+                    characterClass: inquisitor,
+                    archetype: Guids.LivingGrimoireArchetype
+                )
                 .SetDisplayName(ArchetypeDisplayName)
                 .SetDescription(LoremasterLivingGrimoireDescription)
                 .SetHideInUI(true)
@@ -432,7 +429,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetSpellbook(spellbook)
                 .Configure();
 
-            Logger.Log($"Adding {Guids.LoremasterLivingGrimoire} Spellbook to {FeatureSelectionRefs.LoremasterSpellbookSelection.ToString()}");
+            Logger.Log("Adding LG Spellbook to Loremaster Spellbook Selection");
             FeatureSelectionConfigurator.For(FeatureSelectionRefs.LoremasterSpellbookSelection.ToString())
                 .AddToAllFeatures(replacementLM)
                 .SkipAddToSelections()
@@ -440,7 +437,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
             Common.AddToLoremasterSecrets
             (
-                Guids.LoremasterLivingGrimoire,
+                Guids.LivingGrimoireLoremaster,
                 ParametrizedFeatureRefs.LoremasterClericSecretInquisitor.ToString(),
                 ParametrizedFeatureRefs.LoremasterDruidSecretInquisitor.ToString(),
                 ParametrizedFeatureRefs.LoremasterWizardSecretInquisitor.ToString()
@@ -451,6 +448,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         private static BlueprintFeature CreateCantrips()
         {
+            Logger.Log("Creating Living Grimoire Cantrips Feature");
             var cantrips = FeatureConfigurator.New(LivingGrimoireCantrips, Guids.LivingGrimoireCantrips)
                 .CopyFrom(FeatureRefs.InquisitorOrisonsFeature, typeof(LearnSpells), typeof(BindAbilitiesToClass))
                 .SetDisplayName(LivingGrimoireCantripsName)
@@ -486,7 +484,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         
         private static BlueprintFeature CreateHolyBook()
         {
-            Logger.Log($"Configuring {Guids.HolyBookWeaponType} Weapon Focus ({Guids.WeaponFocusHolyBook})");
+            Logger.Log("Creating Weapon Focus (Holy Book)");
             FeatureConfigurator.New(WeaponFocusHolyBook, Guids.WeaponFocusHolyBook)
                 .AddWeaponFocus
                     (
@@ -507,13 +505,19 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetGroups(FeatureGroup.Feat, FeatureGroup.CombatFeat)
                 .Configure();
 
-            Logger.Log($"Configuring {HolyBook}");
             string WeaponGuid = Guids.HolyBookWeapon;
             if (Settings.IsEnabled(Guids.MindfulEnchantmentHomebrew))
                 if (Settings.IsEnabled(Guids.MindfulHolyBookWeapon))
+                {
                     WeaponGuid = Guids.MindfulHolyBookWeapon;
+                    Logger.Log("Using Holy Book (Mindful)");
+                }
+                else
+                    Logger.Log("Using Holy Book (Base)");
+            else
+                Logger.Log("Using Holy Book (Base)");
 
-            Logger.Log($"Blueprint {WeaponGuid} will be used for HolyBook");
+            Logger.Log("Creating Holy Book Feature");
             return FeatureConfigurator.New(HolyBook, Guids.LivingGrimoireHolyBook)
                 .SetDisplayName(HolyBookName)
                 .SetDescription(HolyBookDescription)
@@ -524,10 +528,9 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         }
 
         #region Sacred Word
-
         private static BlueprintFeature CreateSacredWord()
         {
-            Logger.Log($"Creating Weapon Buffs For {Guids.LivingGrimoireSacredWord}");
+            Logger.Log("Creating Sacred Word Damage Buffs");
             Blueprints.BuffConfigurator.New(SacredWordBuff1d6, Guids.SacredWordBuff1d6)
                 .AddSacredWordDamageOverride
                 (
@@ -603,8 +606,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetFrequency(DurationRate.Rounds)
                 .Configure();
 
-            ///TODO: still uh, broken
-            Logger.Log($"Creating Buff Base Feature For {Guids.LivingGrimoireSacredWord}");
+            Logger.Log("Creating Sacred Word Buff Base");
             BuffConfigurator.New(SacredWordBuffBase, Guids.SacredWordBuffBase)
                 .CopyFrom(BuffRefs.WarpriestSacredWeaponBuffBase, typeof(ContextCalculateSharedValue))
                 .AddContextRankConfig
@@ -748,8 +750,8 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .AddSacredWeaponFavoriteDamageOverride()
                 .Configure();
 
-            Logger.Log($"Creating Weapon Switch Feature For {Guids.LivingGrimoireSacredWord}");
-            ActivatableAbilityConfigurator.New(SacredWordWeaponSwitch, Guids.SacredWordWeaponSwitch)
+            Logger.Log("Creating Sacred Word Ability");
+            ActivatableAbilityConfigurator.New(SacredWordSwitch, Guids.SacredWordSwitch)
                 .SetDisplayName(SacredWordName)
                 .SetDescription(SacredWordDescription)
                 .SetBuff(Guids.SacredWordBuffBase)
@@ -770,13 +772,13 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("0556cc4f679127b4fb4115a1e52cf3ea", 21300000))  //use sacred weapon icon
                 .Configure();
 
-            Logger.Log($"Creating Base Damage Feature For Sacred Word {Guids.SacredWordBaseDamageFeature}");
-            return FeatureConfigurator.New(SacredWordBaseDamageFeature, Guids.SacredWordBaseDamageFeature)
+            Logger.Log("Creating Sacred Word Base Damage Feature");
+            return FeatureConfigurator.New(SacredWordBaseDamage, Guids.SacredWordBaseDamage)
                 .AddFacts
                 (
                     facts: new()
                     {
-                        Guids.SacredWordWeaponSwitch.ToString()
+                        Guids.SacredWordSwitch.ToString()
                     }
                 )
                 .SetDisplayName(SacredWordName)
@@ -792,6 +794,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         private static BlueprintFeature CreateSacredWordEnchant()
         {
+            Logger.Log("Creating Sacred Word Enchant Resource");
             AbilityResourceConfigurator.New(SacredWordEnchantResource, Guids.SacredWordEnchantResource)
                 .SetMaxAmount
                 (
@@ -806,11 +809,12 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetMax(20)
                 .Configure();
 
+            Logger.Log("Creating Sacred Word Enchant Buff");
             BuffConfigurator.New(SacredWordOnBuff, Guids.SacredWordOnBuff)
                 .AddFactContextActions
                 (
-                    activated: ActionsBuilder.New().CastSpell(Guids.SacredWordEnchantSwitchAbility),
-                    newRound: ActionsBuilder.New().CastSpell(Guids.SacredWordEnchantSwitchAbility)
+                    activated: ActionsBuilder.New().CastSpell(Guids.SacredWordEnchantSwitch),
+                    newRound: ActionsBuilder.New().CastSpell(Guids.SacredWordEnchantSwitch)
                 )
                 .SetIsClassFeature(false)
                 .SetFlags
@@ -827,6 +831,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetFrequency(DurationRate.Rounds)
                 .Configure();
 
+            Logger.Log("Creating Sacred Word Enchant Activatable Ability");
             ActivatableAbilityConfigurator.New(SacredWordOnAbility, Guids.SacredWordOnAbility)
                 .SetDisplayName(SacredWordName)
                 .SetDescription(SacredWordEnchantDescription)
@@ -853,7 +858,8 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("ce0962e7437e5c448b4b4ea2dd40e4a0", 21300000))  //use sacred weapon icon
                 .Configure();
 
-            AbilityConfigurator.New(SacredWordEnchantSwitchAbility, Guids.SacredWordEnchantSwitchAbility)
+            Logger.Log("Creating Sacred Word Enchant Ability");
+            AbilityConfigurator.New(SacredWordEnchantSwitch, Guids.SacredWordEnchantSwitch)
                 .CopyFrom(AbilityRefs.SacredWeaponEnchantSwitchAbility, typeof(AbilityEffectRunAction), typeof(DisplayNameAttribute), typeof(DescriptionAttribute))
                 .SetAllowNonContextActions(false)
                 .SetType(AbilityType.Supernatural)
@@ -888,14 +894,15 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("7fa6bad9b8b287e40bb6b813ebc5799b", 21300000))  //use sacred weapon icon
                 .Configure();
 
-            return FeatureConfigurator.New(SacredWordEnchantFeature, Guids.SacredWordEnchantFeature)
+            Logger.Log("Creating Sacred Word Enchant Feature");
+            return FeatureConfigurator.New(SacredWordEnchant, Guids.SacredWordEnchant)
                 .SetDisplayName(SacredWordName)
                 .SetDescription(SacredWordEnchantDescription)
                 .AddFacts
                 (
                     facts: new()
                     {
-                        Guids.SacredWordEnchantSwitchAbility,
+                        Guids.SacredWordEnchantSwitch,
                         Guids.SacredWordOnAbility,
                         ActivatableAbilityRefs.SacredWeaponEnchantFlamingChoice.ToString(),
                         ActivatableAbilityRefs.SacredWeaponEnchantFrostChoice.ToString(),
@@ -927,6 +934,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         
         private static BlueprintFeature CreateSacredWordPlus2()
         {
+            Logger.Log("Creating Sacred Word Enchant +2");
             return FeatureConfigurator.New(SacredWordEnchantPlus2, Guids.SacredWordEnchantPlus2)
                 .SetDisplayName(SacredWordEnchantPlus2Name)
                 .SetDescription(SacredWordEnchantDescription)
@@ -956,6 +964,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         private static BlueprintFeature CreateSacredWordPlus3()
         {
+            Logger.Log("Creating Sacred Word Enchant +3");
             return FeatureConfigurator.New(SacredWordEnchantPlus3, Guids.SacredWordEnchantPlus3)
                 .SetDisplayName(SacredWordEnchantPlus3Name)
                 .SetDescription(SacredWordEnchantDescription)
@@ -969,6 +978,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         private static BlueprintFeature CreateSacredWordPlus4()
         {
+            Logger.Log("Creating Sacred Word Enchant +4");
             return FeatureConfigurator.New(SacredWordEnchantPlus4, Guids.SacredWordEnchantPlus4)
                 .SetDisplayName(SacredWordEnchantPlus4Name)
                 .SetDescription(SacredWordEnchantDescription)
@@ -982,6 +992,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         private static BlueprintFeature CreateSacredWordPlus5()
         {
+            Logger.Log("Creating Sacred Word Enchant +5");
             return FeatureConfigurator.New(SacredWordEnchantPlus5, Guids.SacredWordEnchantPlus5)
                 .SetDisplayName(SacredWordEnchantPlus5Name)
                 .SetDescription(SacredWordEnchantDescription)
@@ -1007,10 +1018,44 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         #endregion
 
         #region Blessed Script
-
         private static BlueprintFeature CreateBlessedScript5()
         {
-            return FeatureConfigurator.New(BlessedScript5, Guids.LivingGrimoireBlessedScript5)
+            SpellsTableConfigurator.New(BlessedScript5Table, Guids.BlessedScript5Table)
+                .SetLevels
+                (
+                    new SpellsLevelEntry[]
+                    {
+                        new SpellsLevelEntry(),                                         //0
+                        new SpellsLevelEntry{Count = new int[]{0, 1}},                  //1
+                        new SpellsLevelEntry{Count = new int[]{0, 2}},                  //2
+                        new SpellsLevelEntry{Count = new int[]{0, 3}},                  //3
+                        new SpellsLevelEntry{Count = new int[]{0, 3, 1}},               //4
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 2}},               //5
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3}},               //6
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3, 1}},            //7
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 4, 2}},            //8
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 4, 3}},            //9
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 4, 3, 1}},         //10
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 4, 4, 2}},         //11
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 3}},         //12
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 3, 1}},      //13
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 4, 2}},      //14
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 4, 3}},      //15
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 4, 3, 1}},   //16
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 4, 4, 2}},   //17
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 5, 4, 3}},   //18
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 5, 5, 4}},   //19
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 5, 5, 5}}    //20
+                    }
+                )
+                .Configure();
+
+            SpellbookConfigurator.For(Guids.LivingGrimoireSpellbook)
+                .SetSpellSlots(Guids.BlessedScript5Table)
+                .SetSpellsPerDay(Guids.BlessedScript5Table)
+                .Configure();
+
+            return FeatureConfigurator.New(BlessedScript5, Guids.BlessedScript5)
                 .SetDisplayName(BlessedScriptName)
                 .SetDescription(BlessedScriptDescription)
                 .Configure();
@@ -1018,7 +1063,42 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         
         private static BlueprintFeature CreateBlessedScript8()
         {
-            return FeatureConfigurator.New(BlessedScript8, Guids.LivingGrimoireBlessedScript8)
+            SpellsTableConfigurator.New(BlessedScript8Table, Guids.BlessedScript8Table)
+                .SetLevels
+                (
+                    new SpellsLevelEntry[]
+                    {
+                        new SpellsLevelEntry(),                                         //0
+                        new SpellsLevelEntry{Count = new int[]{0, 1}},                  //1
+                        new SpellsLevelEntry{Count = new int[]{0, 2}},                  //2
+                        new SpellsLevelEntry{Count = new int[]{0, 3}},                  //3
+                        new SpellsLevelEntry{Count = new int[]{0, 3, 1}},               //4
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 2}},               //5
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3}},               //6
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3, 1}},            //7
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 2}},            //8
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 3}},            //9
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 3, 1}},         //10
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 2}},         //11
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 3}},         //12
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 4, 3, 1}},      //13
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 4, 4, 2}},      //14
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 3}},      //15
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 3, 1}},   //16
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 4, 2}},   //17
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 5, 4, 3}},   //18
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 5, 5, 4}},   //19
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 5, 5, 5}}    //20
+                    }
+                )
+                .Configure();
+
+            SpellbookConfigurator.For(Guids.LivingGrimoireSpellbook)
+                .SetSpellSlots(Guids.BlessedScript8Table)
+                .SetSpellsPerDay(Guids.BlessedScript8Table)
+                .Configure();
+
+            return FeatureConfigurator.New(BlessedScript8, Guids.BlessedScript8)
                 .SetDisplayName(BlessedScriptName)
                 .SetDescription(BlessedScriptDescription)
                 .Configure();
@@ -1026,7 +1106,42 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         private static BlueprintFeature CreateBlessedScript12()
         {
-            return FeatureConfigurator.New(BlessedScript12, Guids.LivingGrimoireBlessedScript12)
+            SpellsTableConfigurator.New(BlessedScript12Table, Guids.BlessedScript12Table)
+                .SetLevels
+                (
+                    new SpellsLevelEntry[]
+                    {
+                        new SpellsLevelEntry(),                                         //0
+                        new SpellsLevelEntry{Count = new int[]{0, 1}},                  //1
+                        new SpellsLevelEntry{Count = new int[]{0, 2}},                  //2
+                        new SpellsLevelEntry{Count = new int[]{0, 3}},                  //3
+                        new SpellsLevelEntry{Count = new int[]{0, 3, 1}},               //4
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 2}},               //5
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3}},               //6
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3, 1}},            //7
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 2}},            //8
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 3}},            //9
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 3, 1}},         //10
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 2}},         //11
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 3}},         //12
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 3, 1}},      //13
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 2}},      //14
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 3}},      //15
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 4, 3, 1}},   //16
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 4, 4, 2}},   //17
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 4, 3}},   //18
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 5, 4}},   //19
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 5, 5}}    //20
+                    }
+                )
+                .Configure();
+
+            SpellbookConfigurator.For(Guids.LivingGrimoireSpellbook)
+                .SetSpellSlots(Guids.BlessedScript12Table)
+                .SetSpellsPerDay(Guids.BlessedScript12Table)
+                .Configure();
+
+            return FeatureConfigurator.New(BlessedScript12, Guids.BlessedScript12)
                 .SetDisplayName(BlessedScriptName)
                 .SetDescription(BlessedScriptDescription)
                 .Configure();
@@ -1034,7 +1149,42 @@ namespace TransfiguredCasterArchetypes.Archetypes {
 
         private static BlueprintFeature CreateBlessedScript16()
         {
-            return FeatureConfigurator.New(BlessedScript16, Guids.LivingGrimoireBlessedScript16)
+            SpellsTableConfigurator.New(BlessedScript16Table, Guids.BlessedScript16Table)
+                .SetLevels
+                (
+                    new SpellsLevelEntry[]
+                    {
+                        new SpellsLevelEntry(),                                         //0
+                        new SpellsLevelEntry{Count = new int[]{0, 1}},                  //1
+                        new SpellsLevelEntry{Count = new int[]{0, 2}},                  //2
+                        new SpellsLevelEntry{Count = new int[]{0, 3}},                  //3
+                        new SpellsLevelEntry{Count = new int[]{0, 3, 1}},               //4
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 2}},               //5
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3}},               //6
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 3, 1}},            //7
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 2}},            //8
+                        new SpellsLevelEntry{Count = new int[]{0, 5, 5, 3}},            //9
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 3, 1}},         //10
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 4, 2}},         //11
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 5, 5, 3}},         //12
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 3, 1}},      //13
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 2}},      //14
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 5, 4, 3}},      //15
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 3, 1}},   //16
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 4, 2}},   //17
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 5, 4, 3}},   //18
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 6, 5, 4}},   //19
+                        new SpellsLevelEntry{Count = new int[]{0, 6, 6, 6, 6, 5, 5}}    //20
+                    }
+                )
+                .Configure();
+
+            SpellbookConfigurator.For(Guids.LivingGrimoireSpellbook)
+                .SetSpellSlots(Guids.BlessedScript16Table)
+                .SetSpellsPerDay(Guids.BlessedScript16Table)
+                .Configure();
+
+            return FeatureConfigurator.New(BlessedScript16, Guids.BlessedScript16)
                 .SetDisplayName(BlessedScriptName)
                 .SetDescription(BlessedScriptDescription)
                 .Configure();
@@ -1044,8 +1194,8 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         #region Word Of God
         private static BlueprintFeature CreateWordOfGod()
         {
-            Logger.Log("Creating Ability Resource for Word of God");
-            AbilityResourceConfigurator.New(WordOfGodResource, Guids.LivingGrimoireWordOfGodResource)
+            Logger.Log("Creating Word of God Resource");
+            AbilityResourceConfigurator.New(WordOfGodResource, Guids.WordOfGodResource)
                 .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("32647606f1accbb4d9e64f65ae2b771c", 21300000))
                 .SetMaxAmount
                 (
@@ -1056,8 +1206,8 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetMin(0)
                 .Configure();
 
-            Logger.Log("Creating Caster Buff for Word of God");
-            BuffConfigurator.New(WordOfGodBuff, Guids.LivingGrimoireWordOfGodBuff)
+            Logger.Log("Creating Word of God Caster Buff");
+            BuffConfigurator.New(WordOfGodBuff, Guids.WordOfGodBuff)
                 .AddInitiatorAttackWithWeaponTrigger
                 (
                     onlyHit: true,
@@ -1151,8 +1301,8 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetFrequency(DurationRate.Rounds)
                 .Configure();
 
-            Logger.Log("Creating Ability for Word of God");
-            AbilityConfigurator.New(WordOfGodAbility, Guids.LivingGrimoireWordOfGodAbility)
+            Logger.Log("Creating Word of God Ability");
+            AbilityConfigurator.New(WordOfGodAbility, Guids.WordOfGodAbility)
                 .AddAbilityEffectRunAction
                 (
                     actions: ActionsBuilder.New()
@@ -1170,7 +1320,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 )
                 .AddAbilityResourceLogic
                 (
-                    requiredResource: Guids.LivingGrimoireWordOfGodResource,
+                    requiredResource: Guids.WordOfGodResource,
                     isSpendResource: true,
                     costIsCustom: false,
                     amount: 1
@@ -1203,12 +1353,12 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .Configure();
 
             Logger.Log("Creating Word of God Feature");
-            return FeatureConfigurator.New(WordOfGod, Guids.LivingGrimoireWordOfGod)
+            return FeatureConfigurator.New(WordOfGod, Guids.WordOfGod)
                 .AddFacts
                 (
                     facts: new()
                     {
-                        Guids.LivingGrimoireWordOfGodAbility.ToString()
+                        Guids.WordOfGodAbility.ToString()
                         //AbilityRefs.TrueJudgmentAbility.ToString()
                     },
                     casterLevel: 0,
@@ -1219,18 +1369,18 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 )
                 .AddReplaceAbilitiesStat
                 (
-                    ability: new() { BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.LivingGrimoireWordOfGodAbility) },
+                    ability: new() { BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.WordOfGodAbility) },
                     stat: StatType.Intelligence
                 )
                 .AddReplaceCasterLevelOfAbility
                 (
-                    spell: BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.LivingGrimoireWordOfGodAbility),
+                    spell: BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.WordOfGodAbility),
                     clazz: CharacterClassRefs.InquisitorClass.ToString(),
                     archetypes: new() { BlueprintTool.GetRef<BlueprintArchetypeReference>(Guids.LivingGrimoireArchetype) }
                 )
                 .AddBindAbilitiesToClass
                 (
-                    abilites: new() { BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.LivingGrimoireWordOfGodAbility) },
+                    abilites: new() { BlueprintTool.GetRef<BlueprintAbilityReference>(Guids.WordOfGodAbility) },
                     cantrip: false,
                     characterClass: CharacterClassRefs.InquisitorClass.ToString(),
                     archetypes: new() { BlueprintTool.GetRef<BlueprintArchetypeReference>(Guids.LivingGrimoireArchetype) },
@@ -1242,7 +1392,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .AddAbilityResources
                 (
                     useThisAsResource: false,
-                    resource: Guids.LivingGrimoireWordOfGodResource,
+                    resource: Guids.WordOfGodResource,
                     amount: 0,
                     restoreAmount: true,
                     restoreOnLevelUp: false

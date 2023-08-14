@@ -7,305 +7,384 @@ namespace TransfiguredCasterArchetypes.Util
     static class DescriptionTools
     {
         private static readonly EncyclopediaEntry[] EncyclopediaEntries = new EncyclopediaEntry[] {
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Strength",
                 Patterns = { "Strength" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Dexterity",
                 Patterns = { "Dexterity" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Constitution",
                 Patterns = { "Constitution" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Intelligence",
                 Patterns = { "Intelligence" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Wisdom",
                 Patterns = { "Wisdom" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Charisma",
                 Patterns = { "Charisma" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Ability_Scores",
                 Patterns = { "Ability Scores?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Athletics",
                 Patterns = { "Athletics" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Persuasion",
                 Patterns = { "Persuasion" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Knowledge_World",
                 Patterns = { @"Knowledge \(?World\)?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Knowledge_Arcana",
                 Patterns = { @"Knowledge \(?Arcana\)?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Lore_Nature",
                 Patterns = { @"Lore \(?Nature\)?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Lore_Religion",
                 Patterns = { @"Lore \(?Religion\)?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Mobility",
                 Patterns = { "Mobility" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Perception",
                 Patterns = { "Perception" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Stealth",
                 Patterns = { "Stealth" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Trickery",
                 Patterns = { "Trickery" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Use_Magic_Device",
-                Patterns = {
+                Patterns =
+                {
                     "Use Magic Device",
                     "UMD"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Race",
                 Patterns = { "Race" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Alignment",
                 Patterns = { "Alignment" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Caster_Level",
-                Patterns = {
+                Patterns =
+                {
                     "Caster Level",
                     "CL"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "DC",
                 Patterns = { "DC" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Saving_Throw",
-                Patterns = {
+                Patterns =
+                {
                     "Saving Throws?",
                     "Reflex Save",
                     "Will Save",
                     "Fortitude Save"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Spell_Resistance",
                 Patterns = { "Spell Resistance" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Spell_Fail_Chance",
                 Patterns = { "Arcane Spell Failure" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Concentration_Checks",
                 Patterns = { "Concentration Checks?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Concealment",
                 Patterns = { "Concealment" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Bonus",
                 Patterns = {"Bonus(es)?"}
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Speed",
                 Patterns = { "Speed" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Flat_Footed_AC",
-                Patterns = {
+                Patterns =
+                {
                     "Flat Footed AC",
                     "Flat Footed Armor Class"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Flat_Footed",
-                Patterns = {
+                Patterns =
+                {
                     "Flat Footed",
                     "Flat-Footed"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Armor_Class",
-                Patterns = {
+                Patterns =
+                {
                     "Armor Class",
                     "AC"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Armor_Check_Penalty",
                 Patterns = { "Armor Check Penalty" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Damage_Reduction",
                 Patterns = { "DR" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Free_Action",
                 Patterns = { "Free Action" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Swift_Action",
                 Patterns = { "Swift Action" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Standard_Actions",
                 Patterns = { "Standard Action" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Full_Round_Action",
                 Patterns = { "Full Round Action" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Skills",
-                Patterns = {
+                Patterns =
+                {
                     "Skills? Checks?",
                     "Skills?"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Combat_Maneuvers",
                 Patterns = { "Combat Maneuvers?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "CMB",
-                Patterns = {
+                Patterns =
+                {
                     "Combat Maneuver Bonus",
                     "CMB"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "CMD",
-                Patterns = {
+                Patterns =
+                {
                     "Combat Maneuver Defense",
                     "CMD"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "BAB",
-                Patterns = {
+                Patterns =
+                {
                     "Base Attack Bonus",
                     "BAB"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Incorporeal_Touch_Attack",
                 Patterns = { "Incorporeal Touch Attacks?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "TouchAttack",
                 Patterns = { "Touch Attacks?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "NaturalAttack",
-                Patterns = {
+                Patterns =
+                {
                     "Natural Attacks?",
                     "Natural Weapons?"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Attack_Of_Opportunity",
-                Patterns = {
+                Patterns =
+                {
                     "Attacks? Of Opportunity",
                     "AoO"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Penalty",
                 Patterns = { "Penalty" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Check",
                 Patterns = { "Checks?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Injury_Death",
                 Patterns = { "unconscious" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Spell_Target",
                 Patterns = { "Spells? Aimed" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Spells",
                 Patterns = { "Spells?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Attack",
                 Patterns = { "Attacks?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Feat",
                 Patterns = { "Feats?" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Charge",
                 Patterns = { "Charge" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Critical",
                 Patterns = { "Critical Hit" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Fast_Healing",
                 Patterns = { "Fast Healing" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Temporary_HP",
                 Patterns = { "Temporary HP" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Flanking",
-                Patterns = {
+                Patterns =
+                {
                     "Flanking",
                     "Flanked"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Magic_School",
                 Patterns = { "School of Magic" }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Damage_Type",
-                Patterns = {
+                Patterns =
+                {
                     "Bludgeoning",
                     "Piercing",
                     "Slashing"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Damage",
-                Patterns = {
+                Patterns =
+                {
                     "damage",
                     "damage rolls?"
                 }
             },
-            new EncyclopediaEntry {
+            new EncyclopediaEntry
+            {
                 Entry = "Dice",
-                Patterns = {
+                Patterns =
+                {
                     "rolls?",
                     "rolled"
                 }
@@ -317,12 +396,8 @@ namespace TransfiguredCasterArchetypes.Util
             var result = description;
             result = result.StripHTML();
             foreach (var entry in EncyclopediaEntries)
-            {
                 foreach (var pattern in entry.Patterns)
-                {
                     result = result.ApplyTags(pattern, entry);
-                }
-            }
             return result;
         }
 
@@ -332,9 +407,7 @@ namespace TransfiguredCasterArchetypes.Util
             public List<string> Patterns = new List<string>();
 
             public string Tag(string keyword)
-            {
-                return $"{{g|Encyclopedia:{Entry}}}{keyword}{{/g}}";
-            }
+            { return $"{{g|Encyclopedia:{Entry}}}{keyword}{{/g}}"; }
         }
 
         internal static string ApplyTags(this string str, string from, EncyclopediaEntry entry)
@@ -350,28 +423,18 @@ namespace TransfiguredCasterArchetypes.Util
                 var resultPattern = new Regex(Regex.Escape(firstMatch).EnforceSolo().ExcludeTagged(), RegexOptions.IgnoreCase);
                 str = resultPattern.Replace(str, entry.Tag(firstMatch), 1);
             }
-            /*
-            foreach (string match in matches) {
-                str = Regex.Replace(str, Regex.Escape(match).EnforceSolo().ExcludeTagged(), entry.Tag(match), RegexOptions.IgnoreCase);
-            }
-            */
             return str;
         }
         public static string StripHTML(this string str)
-        {
-            return Regex.Replace(str, "<.*?>", string.Empty);
-        }
+        { return Regex.Replace(str, "<.*?>", string.Empty); }
+
         public static string StripEncyclopediaTags(this string str)
-        {
-            return Regex.Replace(str, "{.*?}", string.Empty);
-        }
+        { return Regex.Replace(str, "{.*?}", string.Empty); }
+
         private static string ExcludeTagged(this string str)
-        {
-            return $"{@"(?<!{g\|Encyclopedia:\w+}[^}]*)"}{str}{@"(?![^{]*{\/g})"}";
-        }
+        { return $"{@"(?<!{g\|Encyclopedia:\w+}[^}]*)"}{str}{@"(?![^{]*{\/g})"}"; }
+
         private static string EnforceSolo(this string str)
-        {
-            return $"{@"(?<![\w>]+)"}{str}{@"(?![^\s\.,""'<)]+)"}";
-        }
+        { return $"{@"(?<![\w>]+)"}{str}{@"(?![^\s\.,""'<)]+)"}"; }
     }
 }

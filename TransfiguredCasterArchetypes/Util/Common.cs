@@ -39,7 +39,8 @@ namespace CharacterOptionsPlus.Util
         /// <param name="replacementGuid">New replacement guid</param>
         /// <param name="spellbook">Spellbook for new replacement</param>
         /// <param name="replacementSelection">Guid / name of replacement selection bp</param>
-        internal static void ConfigureArchetypeSpellbookReplacement(
+        internal static void ConfigureArchetypeSpellbookReplacement
+        (
             string characterClass,
             string archetype,
             string baseReplacement,
@@ -48,7 +49,8 @@ namespace CharacterOptionsPlus.Util
             string replacementGuid,
             BlueprintSpellbook spellbook,
             string replacementSelection,
-            params Type[] typesToCopy)
+            params Type[] typesToCopy
+        )
         {
             Logger.Log($"Setting Prereqisites for {baseReplacement} Spellbook");
             FeatureReplaceSpellbookConfigurator.For(baseReplacement)
@@ -79,7 +81,8 @@ namespace CharacterOptionsPlus.Util
         /// <param name="replacementName">New replacement name</param>
         /// <param name="replacementGuid">New replacement guid</param>
         /// <param name="replacementSelection">Guid / name of replacement selection bp</param>
-        internal static void ConfigureArchetypeProgressionReplacement(
+        internal static void ConfigureArchetypeProgressionReplacement
+        (
             string characterClass,
             string archetype,
             string baseReplacement,
@@ -87,7 +90,8 @@ namespace CharacterOptionsPlus.Util
             string replacementName,
             string replacementGuid,
             string replacementSelection,
-            params Type[] typesToCopy)
+            params Type[] typesToCopy
+        )
         {
             Logger.Log($"Setting Prereqisites for {baseReplacement} Progression");
             ProgressionConfigurator.For(baseReplacement)
@@ -118,7 +122,8 @@ namespace CharacterOptionsPlus.Util
         /// <param name="replacementGuid">New replacement guid</param>
         /// <param name="spellbook">Spellbook for new replacement</param>
         /// <param name="replacementSelection">Guid / name of replacement selection bp</param>
-        internal static void ConfigureArchetypeSpellbookReplacementFromProgression(
+        internal static void ConfigureArchetypeSpellbookReplacementFromProgression
+        (
             string characterClass,
             string archetype,
             string baseReplacement,
@@ -126,7 +131,8 @@ namespace CharacterOptionsPlus.Util
             string replacementName,
             string replacementGuid,
             BlueprintSpellbook spellbook,
-            string replacementSelection)
+            string replacementSelection
+        )
         {
             Logger.Log($"Restricting {archetype} from using {baseReplacement} Progression");
             ProgressionConfigurator.For(baseReplacement)

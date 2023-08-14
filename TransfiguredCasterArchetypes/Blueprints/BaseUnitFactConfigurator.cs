@@ -1,23 +1,11 @@
-﻿using BlueprintCore.Actions.Builder;
-using BlueprintCore.Blueprints.Components.Replacements;
-using BlueprintCore.Blueprints.CustomConfigurators;
-using BlueprintCore.Conditions.Builder;
-using BlueprintCore.Utils;
-using BlueprintCore.Utils.Assets;
-using BlueprintCore.Utils.Types;
-using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs;
+﻿using BlueprintCore.Blueprints.CustomConfigurators;
 using BlueprintCore.Utils;
 using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Facts;
 using Kingmaker.RuleSystem;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TransfiguredCasterArchetypes.Archetypes;
 using BlueprintCore.Blueprints.Configurators.Facts;
-using BlueprintCore.Blueprints.Configurators.UnitLogic.Buffs;
 using Kingmaker.UnitLogic.Buffs.Blueprints;
 
 namespace TransfiguredCasterArchetypes.Blueprints

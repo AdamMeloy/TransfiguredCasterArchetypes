@@ -8,7 +8,6 @@ using TransfiguredCasterArchetypes.Classes;
 using TransfiguredCasterArchetypes.Feats;
 using TransfiguredCasterArchetypes.Homebrew;
 using TransfiguredCasterArchetypes.Weapons;
-using System.Data;
 
 namespace TransfiguredCasterArchetypes.Util
 {
@@ -16,49 +15,47 @@ namespace TransfiguredCasterArchetypes.Util
     internal static class Guids
     {
         private static readonly Logging.Logger Logger = Logging.GetLogger(nameof(Guids));
+
         #region Archetypes
+        //Living Grimoire Guids
         internal const string LivingGrimoireArchetype = "40edee0c-5258-4955-90c1-6dad9ed31ceb";
         internal const string LivingGrimoireCantrips = "b00f7255-3e04-4236-8082-f70763312832";
         internal const string LivingGrimoireSpellbook = "03f7cfc2-2601-4644-80e9-c5d134e116f6";
-
+        internal const string LivingGrimoireMysticTheurgeLevelUp = "fda9291b-5d43-4863-985c-1e02e8531077";
+        internal const string LivingGrimoireMysticTheurge = "205a451e-bb85-491d-b4d2-7c8eaaa5d42d";
+        internal const string LivingGrimoireHellknightSignifer = "7714ce86-1c56-4cbb-a18b-3a31962bde3c";
+        internal const string LivingGrimoireLoremaster = "f48c483e-71ea-4e9b-9ddb-629fd63f21d1";
         internal const string LivingGrimoireHolyBook = "5c904fe3-a669-4469-b337-21918a08fdcb";
-        internal const string WeaponFocusHolyBook = "c6a718bf-d499-4fd2-8223-662e9177fea1";
-
-        internal const string LivingGrimoireSacredWord = "6aab1970-2b2f-45b1-be6e-bbdd7395baa3";
-        internal const string SacredWordBaseDamageFeature = "35d822cd-a58c-4474-9a1d-d862bcf94e6e";
-        internal const string SacredWordWeaponSwitch = "7500aa92-a520-49f2-b674-1fb87e3d2504";
-
+        internal const string SacredWord = "6aab1970-2b2f-45b1-be6e-bbdd7395baa3";
+        internal const string SacredWordOnAbility = "ac00a980-6d1f-4f9c-80f4-da99148fba5c";
+        internal const string SacredWordBaseDamage = "35d822cd-a58c-4474-9a1d-d862bcf94e6e";
+        internal const string SacredWordSwitch = "7500aa92-a520-49f2-b674-1fb87e3d2504";
+        internal const string SacredWordOnBuff = "8d02bdaa-24fe-4bf5-a91c-57080f765b85";
         internal const string SacredWordBuffBase = "79dfc2a9-6832-4c0d-be61-2dd6e575c800";
         internal const string SacredWordBuff1d6 = "71c0586a-8bde-4eb3-87d8-505244c042f4";
         internal const string SacredWordBuff1d8 = "0220b0c9-5c1c-4b44-bbb9-bb2aa40eb6a5";
         internal const string SacredWordBuff1d10 = "b3ce498d-2128-4262-9635-8958b47d5156";
         internal const string SacredWordBuff2d6 = "15bfce87-d2ea-46bd-b89e-a97096e858d8";
         internal const string SacredWordBuff2d8 = "7d5ed577-1d7c-48a3-bd58-206a02b9203e";
-
-        internal const string SacredWordOnBuff = "8d02bdaa-24fe-4bf5-a91c-57080f765b85";
-        internal const string SacredWordOnAbility = "ac00a980-6d1f-4f9c-80f4-da99148fba5c";
-        internal const string SacredWordEnchantSwitchAbility = "aa8a52c2-bd32-4860-b7f0-20e30dab105b";
-        internal const string SacredWordEnchantFeature = "de049b6b-0cf7-463e-ab14-7e49d7e58799";
+        internal const string SacredWordEnchant = "de049b6b-0cf7-463e-ab14-7e49d7e58799";
+        internal const string SacredWordEnchantSwitch = "aa8a52c2-bd32-4860-b7f0-20e30dab105b";
         internal const string SacredWordEnchantResource = "7daa5558-26b7-4f56-b8ce-c666dbb07a7f";
         internal const string SacredWordEnchantPlus2 = "6fbf5c44-4072-4879-afb0-c159fb9c7b3a";
         internal const string SacredWordEnchantPlus3 = "c74e71fc-1f9a-432e-9fc9-29d129045cde";
         internal const string SacredWordEnchantPlus4 = "a7876ca7-09b6-4789-9b0a-bf1841226e9e";
         internal const string SacredWordEnchantPlus5 = "55a81ea1-177d-4331-8a0d-aa8d9b870d93";
-
-        internal const string LivingGrimoireBlessedScriptTable = "e91e03a3-2873-4fe1-b5a4-9872b0f103ed";
-        internal const string LivingGrimoireBlessedScript5 = "b1b045b8-829d-4850-8ecc-e025458074d4";
-        internal const string LivingGrimoireBlessedScript8 = "1ddfc107-50be-435d-a833-0b5ed4b76164";
-        internal const string LivingGrimoireBlessedScript12 = "9c7c9470-4ec0-47e2-b441-30de3f78d3a8";
-        internal const string LivingGrimoireBlessedScript16 = "80e813f9-ddf6-4426-aae4-1d53d6314354";
-        internal const string LivingGrimoireWordOfGod = "f2e47e4f-259d-48a6-a743-fb404a4e0fee";
-        internal const string LivingGrimoireWordOfGodAbility = "70668bfc-b86b-420e-a9ba-78a8ee61ac15";
-        internal const string LivingGrimoireWordOfGodResource = "f68cccbe-a8e0-4453-9aca-05ce932d6c0e";
-        internal const string LivingGrimoireWordOfGodBuff = "90257617-02b7-4d6e-98ac-d31cc891d7e1";
-
-        internal const string MysticTheurgeLivingGrimoireLevelUp = "fda9291b-5d43-4863-985c-1e02e8531077";
-        internal const string MysticTheurgeLivingGrimoire = "205a451e-bb85-491d-b4d2-7c8eaaa5d42d";
-        internal const string HellknightSigniferLivingGrimoire = "7714ce86-1c56-4cbb-a18b-3a31962bde3c";
-        internal const string LoremasterLivingGrimoire = "f48c483e-71ea-4e9b-9ddb-629fd63f21d1";
+        internal const string BlessedScript5 = "b1b045b8-829d-4850-8ecc-e025458074d4";
+        internal const string BlessedScript5Table = "e91e03a3-2873-4fe1-b5a4-9872b0f103ed";
+        internal const string BlessedScript8 = "1ddfc107-50be-435d-a833-0b5ed4b76164";
+        internal const string BlessedScript8Table = "986de5aa-6fef-4c63-84dd-4590cad9fa03";
+        internal const string BlessedScript12 = "9c7c9470-4ec0-47e2-b441-30de3f78d3a8";
+        internal const string BlessedScript12Table = "402e2ae2-3d12-4add-b4c9-6c3231df1491";
+        internal const string BlessedScript16 = "80e813f9-ddf6-4426-aae4-1d53d6314354";
+        internal const string BlessedScript16Table = "907d0ed2-e583-442c-80ed-0e2042634dec";
+        internal const string WordOfGod = "f2e47e4f-259d-48a6-a743-fb404a4e0fee";
+        internal const string WordOfGodAbility = "70668bfc-b86b-420e-a9ba-78a8ee61ac15";
+        internal const string WordOfGodBuff = "90257617-02b7-4d6e-98ac-d31cc891d7e1";
+        internal const string WordOfGodResource = "f68cccbe-a8e0-4453-9aca-05ce932d6c0e";
 
         internal static readonly (string guid, string displayName)[] Archetypes =
             new (string, string)[]
@@ -68,7 +65,6 @@ namespace TransfiguredCasterArchetypes.Util
         #endregion
 
         #region Classes
-        internal const string InvestigatorClass = "6acb0e12-7f1b-4edd-a619-d8438c7f23cf";
 
         internal static readonly (string guid, string displayName)[] Classes =
             new (string, string)[]
@@ -79,7 +75,6 @@ namespace TransfiguredCasterArchetypes.Util
 
         #region Class Features
 
-
         internal static readonly (string guid, string displayName)[] ClassFeatures =
             new (string, string)[]
             {
@@ -88,6 +83,7 @@ namespace TransfiguredCasterArchetypes.Util
         #endregion
 
         #region Feats
+        internal const string WeaponFocusHolyBook = "c6a718bf-d499-4fd2-8223-662e9177fea1";
 
         internal static readonly (string guid, string displayName)[] Feats =
             new (string, string)[]
