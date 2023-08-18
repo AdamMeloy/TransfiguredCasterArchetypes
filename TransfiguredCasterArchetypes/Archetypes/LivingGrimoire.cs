@@ -503,6 +503,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetReapplyOnLevelUp(false)
                 .SetIsClassFeature(true)
                 .SetGroups(FeatureGroup.Feat, FeatureGroup.CombatFeat)
+                .SkipAddToSelections()
                 .Configure();
 
             string WeaponGuid = Guids.HolyBookWeapon;
@@ -1412,7 +1413,6 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         }
         #endregion
     }
-
     [TypeId("7ddc53e032064d17b25740d1d94a7c22")]
     [AllowedOn(typeof(BlueprintUnitFact), false)]
     public class SacredWordDamageOverride : UnitFactComponentDelegate, IInitiatorRulebookHandler<RuleCalculateWeaponStats>, IRulebookHandler<RuleCalculateWeaponStats>, ISubscriber, IInitiatorRulebookSubscriber
@@ -1426,9 +1426,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         public void OnEventAboutToTrigger(RuleCalculateWeaponStats evt)
         {
             if (evt.Weapon.Blueprint.Name.Equals("Holy Book"))
-            {
-                evt.WeaponDamageDice.Modify(Formula, base.Fact);
-            }
+                evt.WeaponDamageDice.Modify(Formula, Fact);
         }
 
         public void OnEventDidTrigger(RuleCalculateWeaponStats evt) {}

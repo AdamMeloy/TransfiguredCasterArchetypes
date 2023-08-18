@@ -93,18 +93,17 @@ namespace TransfiguredCasterArchetypes.Util
         #endregion
 
         #region Weapons
-        internal const string HolyBookWeapon = "e16ebc96-f796-43ed-91fa-c36fc4391953";
-        internal const string MindfulHolyBookWeapon = "dccc986b-4ef8-4932-95f5-8a1ffa160874";
+        internal const string HolyBookWeapon = "e16ebc96-f796-43ed-91fa-c36fc4391953"; //Requirement for LG, Enabled/Disabled with LG
 
         internal static readonly (string guid, string displayName)[] Weapons =
             new (string, string)[]
             {
-                (MindfulHolyBookWeapon, MindfulHolyBook.WeaponName)
+                
             };
         #endregion
 
         #region WeaponTypes
-        internal const string HolyBookWeaponType = "52e35127-abe2-463a-b561-49e03ac5a1e8";
+        internal const string HolyBookWeaponType = "52e35127-abe2-463a-b561-49e03ac5a1e8"; //Requirement for LG, Enabled/Disabled with LG
 
         internal static readonly (string guid, string displayName)[] WeaponTypes =
             new (string, string)[]
@@ -115,11 +114,13 @@ namespace TransfiguredCasterArchetypes.Util
 
         #region Homebrew
         internal const string MindfulEnchantmentHomebrew = "d34a6a50-bf7f-480b-9954-2cc21b8cade8";
+        internal const string MindfulHolyBookWeapon = "dccc986b-4ef8-4932-95f5-8a1ffa160874"; //Option has no effect if LG is Disabled
 
         internal static readonly (string guid, string displayName)[] Homebrew =
             new (string, string)[]
             {
-                (MindfulEnchantmentHomebrew, MindfulEnchantment.EnchantmentName)
+                (MindfulEnchantmentHomebrew, MindfulEnchantment.EnchantmentName),
+                (MindfulHolyBookWeapon, MindfulHolyBook.InternalWeaponName)
             };
         #endregion
 

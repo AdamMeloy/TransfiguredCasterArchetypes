@@ -24,9 +24,7 @@ namespace TransfiguredCasterArchetypes.Weapons
                     ConfigureDisabled();
             }
             catch (Exception e)
-            {
-                Logger.LogException("HolyBook.Configure", e);
-            }
+            { Logger.LogException("HolyBook.Configure", e); }
         }
 
         internal static void ConfigureDelayed()
@@ -37,35 +35,26 @@ namespace TransfiguredCasterArchetypes.Weapons
                     ConfigureEnabledDelayed();
             }
             catch (Exception e)
-            {
-                Logger.LogException("HolyBook.ConfigureDelayed", e);
-            }
+            { Logger.LogException("HolyBook.ConfigureDelayed", e); }
         }
 
         private static void ConfigureDisabled()
         {
             Logger.Log($"Configuring {Weapon} (disabled)");
-
-            ItemWeaponConfigurator.New(Weapon, Guids.HolyBookWeapon)
-                .Configure();
-
+            ItemWeaponConfigurator.New(Weapon, Guids.HolyBookWeapon).Configure();
         }
 
         private static void ConfigureEnabled()
         {
             Logger.Log($"Configuring {Weapon}");
-
-            var weapon = ItemWeaponConfigurator.New(Weapon, Guids.HolyBookWeapon)
+            ItemWeaponConfigurator.New(Weapon, Guids.HolyBookWeapon)
                 .CopyFrom(ItemWeaponRefs.ColdIronLightMace.ToString())
                 .SetDisplayNameText(WeaponName)
-
                 .SetIcon((Sprite)UnityObjectConverter.AssetList.Get("7ab85c5de2127eb49a1e3ba027ffb171", 21300000))
-
                 .SetCost(-100000)
                 .SetIsNotable(true)
                 .SetDestructible(false)
                 .SetCR(0)
-
                 .SetWeight(0)
                 .SetType(Guids.HolyBookWeaponType)
                 .SetSize(Kingmaker.Enums.Size.Medium)
