@@ -545,6 +545,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetRanks(0)
                 .SetTickEachSecond(false)
                 .SetFrequency(DurationRate.Rounds)
+                .SetDisplayName(SacredWordName)
                 .Configure();
 
             Blueprints.BuffConfigurator.New(SacredWordBuff1d8, Guids.SacredWordBuff1d8)
@@ -560,6 +561,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetRanks(0)
                 .SetTickEachSecond(false)
                 .SetFrequency(DurationRate.Rounds)
+                .SetDisplayName(SacredWordName)
                 .Configure();
 
             Blueprints.BuffConfigurator.New(SacredWordBuff1d10, Guids.SacredWordBuff1d10)
@@ -575,6 +577,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetRanks(0)
                 .SetTickEachSecond(false)
                 .SetFrequency(DurationRate.Rounds)
+                .SetDisplayName(SacredWordName)
                 .Configure();
 
             Blueprints.BuffConfigurator.New(SacredWordBuff2d6, Guids.SacredWordBuff2d6)
@@ -590,6 +593,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetRanks(0)
                 .SetTickEachSecond(false)
                 .SetFrequency(DurationRate.Rounds)
+                .SetDisplayName(SacredWordName)
                 .Configure();
 
             Blueprints.BuffConfigurator.New(SacredWordBuff2d8, Guids.SacredWordBuff2d8)
@@ -605,6 +609,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                 .SetRanks(0)
                 .SetTickEachSecond(false)
                 .SetFrequency(DurationRate.Rounds)
+                .SetDisplayName(SacredWordName)
                 .Configure();
 
             Logger.Log("Creating Sacred Word Buff Base");
@@ -748,6 +753,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
                         )
                     )
                 )
+                .SetDisplayName(SacredWordName)
                 .AddSacredWeaponFavoriteDamageOverride()
                 .Configure();
 
@@ -1426,7 +1432,7 @@ namespace TransfiguredCasterArchetypes.Archetypes {
         public void OnEventAboutToTrigger(RuleCalculateWeaponStats evt)
         {
             if (evt.Weapon.Blueprint.Name.Equals("Holy Book"))
-                evt.WeaponDamageDice.Modify(Formula, Fact);
+                evt.WeaponDamageDice.Modify(this.Formula, base.Fact);
         }
 
         public void OnEventDidTrigger(RuleCalculateWeaponStats evt) {}

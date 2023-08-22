@@ -80,6 +80,22 @@ namespace TransfiguredCasterArchetypes.Blueprints
 
         //
         // Summary:
+        //     Sets the value of Kingmaker.Blueprints.Facts.BlueprintUnitFact.m_DisplayName
+        //
+        // Parameters:
+        //   displayName:
+        //     You can pass in the string using a LocalizedString or the Key to a LocalizedString.
+        public TBuilder SetDisplayName(LocalString displayName)
+        {
+            LocalString displayName2 = displayName;
+            return OnConfigureInternal(delegate (T bp)
+            {
+                bp.m_DisplayName = displayName2?.LocalizedString;
+            });
+        }
+
+        //
+        // Summary:
         //     Adds Kingmaker.UnitLogic.Mechanics.Components.SacredWeaponDamageOverride
         //
         // Parameters:
